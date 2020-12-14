@@ -22,8 +22,8 @@ public class FrequencySort {
 
         StringBuilder sb = new StringBuilder();
         while(!pq.isEmpty()) {
-            Map.Entry e = pq.poll();
-            for(int i = 0; i<(int)e.getValue(); i++ ) {
+            Map.Entry<Character, Integer> e = pq.poll();
+            for(int i = 0; i<e.getValue(); i++ ) {
                 sb.append(e.getKey());
             }
         }
