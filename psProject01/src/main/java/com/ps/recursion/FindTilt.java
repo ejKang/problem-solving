@@ -23,7 +23,7 @@ public class FindTilt {
         return rst;   
     }
 
-    public static int  recursionMethod(TreeNode node) {
+    public static int recursionMethod(TreeNode node) {
         if (node == null) {
             return 0;
         }
