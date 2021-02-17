@@ -11,9 +11,36 @@ public class FixedMultiStack {
         stackCapacity = stackSize;
         values = new int[stackCapacity * numberOfStacks];
         sizes = new int[numberOfStacks];
-        
+
     }
 
+    public void push(int stackNum, int value) {
+
+    }
+
+    public int pop(int stackNum) {
+
+
+        return 0;
+    }
+
+    public int peek (int stackNum) {
+
+        return 0;
+    }
+
+    public boolean isEmpty(int stackNum) {
+
+        return true;
+    }
+    public boolean isFull(int stackNum) {
+
+        return true;
+    }
+
+    private int indexOfTop(int stackNum) {
+        return 0;
+    }
 
     public static void main(String[] args) {
         
