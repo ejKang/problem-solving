@@ -5,6 +5,7 @@ public class MySqrt {
     public static void main(String[] args) {
         MySqrt m = new MySqrt();
         m.mySqrt(8);
+        System.out.println("sssss");
     }
 
     public int mySqrt(int x) {
