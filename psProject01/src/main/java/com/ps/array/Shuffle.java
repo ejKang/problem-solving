@@ -14,7 +14,7 @@ public class Shuffle {
     }
 
     public int[] shuffle(int[] nums, int n) {
-        int idx = 0, idx_1 = 1; 
+        int idx = 0; 
 
         int [] rst = new int [nums.length];
 
