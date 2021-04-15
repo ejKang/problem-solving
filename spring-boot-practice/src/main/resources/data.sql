@@ -1,0 +1,1 @@
+INSERT INTO MEMBER ( MBR_NO, ID, NAME ) VALUES ( 1 , 'tttt', 'Tom');
