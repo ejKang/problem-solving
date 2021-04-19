@@ -8,20 +8,20 @@ public class ClimbStair {
     }
 
     public int climbStairs(int n) {
-        // int[] t = new int[n + 1];
-        // t[0] = 1;
-        // t[1] = 1;
-        // int rst = df(n, t);
-
-        // return rst;
-
-        int[] t = new int[n];
+        int[] t = new int[n + 1];
         t[0] = 1;
         t[1] = 1;
-        for (int i=2; i<n; i++) {
-            t[i] = t[i-1] + t[i-2];
-        }
-        return t[n-1];
+        int rst = df(n, t);
+
+        return rst;
+
+        // int[] t = new int[n];
+        // t[0] = 1;
+        // t[1] = 1;
+        // for (int i=2; i<n; i++) {
+        // t[i] = t[i-1] + t[i-2];
+        // }
+        // return t[n-1];
     }
 
     private int df(int n, int[] t) {
