@@ -1,5 +1,6 @@
 package com.joo.book.springboot.springbootwebservice.domain.posts;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
@@ -38,6 +39,21 @@ public class PostsRepositoryTest {
         assertThat(post.getTitle()).isEqualTo(title);
         assertThat(post.getContent()).isEqualTo(content);
 
-        
+    }
+
+    @Test
+    public void BaseTimeEntity_등록() {
+
+        LocalDateTime now = LocalDateTime.of(2021, 4, 26, 0, 0, 0);
+        postsRepository.save(Posts.builder().title("title").content("content").author("author").build());
+
+        List<Posts> postsList = postsRepository.findAll();
+
+        Posts posts = postsList.get(0);
+
+        System.out.println(
+                ">>>>>>>>>> createDate=" + posts.getCreatedDate() + ", modifiedDate=" + posts.getModifiedDate());
+        assertThat(posts.getCreatedDate()).isAfter(now);
+        assertThat(posts.getModifiedDate()).isAfter(now);
     }
 }
