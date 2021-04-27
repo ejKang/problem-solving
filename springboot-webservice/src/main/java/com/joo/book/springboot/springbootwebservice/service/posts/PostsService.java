@@ -1,7 +1,12 @@
 package com.joo.book.springboot.springbootwebservice.service.posts;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.joo.book.springboot.springbootwebservice.domain.posts.Posts;
 import com.joo.book.springboot.springbootwebservice.domain.posts.PostsRepository;
+import com.joo.book.springboot.springbootwebservice.web.dto.PostsListResponseDto;
 import com.joo.book.springboot.springbootwebservice.web.dto.PostsResponseDto;
 import com.joo.book.springboot.springbootwebservice.web.dto.PostsSaveRequestDto;
 import com.joo.book.springboot.springbootwebservice.web.dto.PostsUpdateRequestDto;
@@ -33,6 +38,11 @@ public class PostsService {
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
         return new PostsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 
 }
