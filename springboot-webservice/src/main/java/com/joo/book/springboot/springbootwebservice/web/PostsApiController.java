@@ -5,6 +5,7 @@ import com.joo.book.springboot.springbootwebservice.web.dto.PostsResponseDto;
 import com.joo.book.springboot.springbootwebservice.web.dto.PostsSaveRequestDto;
 import com.joo.book.springboot.springbootwebservice.web.dto.PostsUpdateRequestDto;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,5 +33,11 @@ public class PostsApiController {
 
     public PostsResponseDto findById(@PathVariable Long id) {
         return postsService.findById(id);
+    }
+
+    @DeleteMapping("/api/v1/posts/{id}")
+    public Long delete(@PathVariable Long id) {
+        postsService.delete(id);
+        return id;
     }
 }
