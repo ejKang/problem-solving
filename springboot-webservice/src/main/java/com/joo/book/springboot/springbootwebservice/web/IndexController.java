@@ -1,5 +1,9 @@
 package com.joo.book.springboot.springbootwebservice.web;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
+
+import com.joo.book.springboot.springbootwebservice.config.auth.dto.SessionUser;
 import com.joo.book.springboot.springbootwebservice.service.posts.PostsService;
 import com.joo.book.springboot.springbootwebservice.web.dto.PostsResponseDto;
 
@@ -15,10 +19,15 @@ import lombok.RequiredArgsConstructor;
 public class IndexController {
 
     private final PostsService PostsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("posts", PostsService.findAllDesc());
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
         return "index";
     }
 

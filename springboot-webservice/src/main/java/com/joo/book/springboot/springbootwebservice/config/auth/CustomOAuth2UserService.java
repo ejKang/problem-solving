@@ -5,6 +5,7 @@ import java.util.Collections;
 import javax.servlet.http.HttpSession;
 
 import com.joo.book.springboot.springbootwebservice.config.auth.dto.OAuthAttributes;
+import com.joo.book.springboot.springbootwebservice.config.auth.dto.SessionUser;
 import com.joo.book.springboot.springbootwebservice.domain.user.User;
 import com.joo.book.springboot.springbootwebservice.domain.user.UserRepository;
 
