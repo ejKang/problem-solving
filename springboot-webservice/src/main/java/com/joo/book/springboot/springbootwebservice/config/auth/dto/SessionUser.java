@@ -1,11 +1,13 @@
 package com.joo.book.springboot.springbootwebservice.config.auth.dto;
 
+import java.io.Serializable;
+
 import com.joo.book.springboot.springbootwebservice.domain.user.User;
 
 import lombok.Getter;
 
 @Getter
-public class SessionUser {
+public class SessionUser implements Serializable {
     private String name;
     private String email;
     private String picture;

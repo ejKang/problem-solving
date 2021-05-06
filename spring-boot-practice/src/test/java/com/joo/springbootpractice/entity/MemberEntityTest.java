@@ -25,6 +25,6 @@ public class MemberEntityTest {
 										.name("Tom")
 										.build();
 		final String name = member.getName();
-		assertEquals("jTom", name);
+		assertEquals("Tom", name);
 	}
 }
