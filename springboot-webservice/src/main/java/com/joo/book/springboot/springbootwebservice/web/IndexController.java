@@ -1,8 +1,5 @@
 package com.joo.book.springboot.springbootwebservice.web;
 
-import javax.mail.Session;
-import javax.servlet.http.HttpSession;
-
 import com.joo.book.springboot.springbootwebservice.config.auth.LoginUser;
 import com.joo.book.springboot.springbootwebservice.config.auth.dto.SessionUser;
 import com.joo.book.springboot.springbootwebservice.service.posts.PostsService;
@@ -20,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class IndexController {
 
     private final PostsService PostsService;
-    private final HttpSession httpSession;
+    // private final HttpSession httpSession;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {

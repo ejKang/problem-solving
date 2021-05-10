@@ -39,6 +39,7 @@ public class OAuthAttributes {
                 .nameAttributeKey(userNameAttributeName).build();
     }
 
+    @SuppressWarnings("unchecked")
     private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
 
@@ -48,6 +49,6 @@ public class OAuthAttributes {
     }
 
     public User toEntity() {
-        return User.builder().name(name).email(email).picture(picture).role(Role.GUEST).build();
+        return User.builder().name(name).email(email).picture(picture).role(Role.USER).build();
     }
 }
