@@ -6,6 +6,7 @@ import com.joo.book.springboot.springbootwebservice.web.dto.PostsSaveRequestDto;
 import com.joo.book.springboot.springbootwebservice.web.dto.PostsUpdateRequestDto;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -39,5 +40,10 @@ public class PostsApiController {
     public Long delete(@PathVariable Long id) {
         postsService.delete(id);
         return id;
+    }
+
+    @GetMapping("/api/v1/posts")
+    public Long getTest() {
+        return postsService.get();
     }
 }
