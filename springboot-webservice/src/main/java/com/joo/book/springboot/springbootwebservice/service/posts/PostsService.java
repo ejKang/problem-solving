@@ -20,12 +20,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
-@Service
+@Service // service에서 비지니스 로직을 처리 = X
+         // service는 트랜잭션, 도메인 간 순서 보장의 역할만 한다.
+         // 비지니스 로직을 처리하는 부분은 domain이다
 @Slf4j
 public class PostsService {
 
     private final RestTemplate restTemplate;
-    private final PostsRepository postsRepository;
+    private final PostsRepository postsRepository; // 롬복 어노테이션을 통해 bean을 주입 받는다 ( 생성자를 통해 )
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {

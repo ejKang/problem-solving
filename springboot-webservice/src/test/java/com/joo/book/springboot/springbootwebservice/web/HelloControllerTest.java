@@ -19,9 +19,12 @@ import com.joo.book.springboot.springbootwebservice.config.auth.SecurityConfig;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
+// 스프링 부트 테스트와 junit 사이에 연결자 역할
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = HelloController.class, excludeFilters = {
         @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class) })
+// jpa 기능이 동작하지 않는 테스트 어노테이션
+// controller와 controllerAdvice 등 외부 연동과 관련된 부분만 활성화 된다
 public class HelloControllerTest {
 
     @Autowired
