@@ -22,8 +22,8 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", PostsService.findAllDesc());
-        // SessionUser user = (SessionUser) httpSession.getAttribute("user");
-        if (user != null) {
+        // SessionUser user = (SessionUser) httpSession.getAttribute("user"); // CustomOAuth2UserService에서 로그인 성공 시 세선에 SessionUser를 저장하도록 구성
+        if (user != null) { // 세선에 저장된 값이 있을 때만 model에 userName을 등록해 준다
             model.addAttribute("userName", user.getName());
         }
         return "index";

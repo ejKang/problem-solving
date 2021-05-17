@@ -12,10 +12,10 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Configuration
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer { 
     private final LoginUserArgumentResolver loginUserArgumentResolver;
 
-    @Override
+    @Override // HandlerMethodArgumentResolver는 항상 WebMvcConfigurer의 addArgumentResulvers()를 통해 추가해야 한다 
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(loginUserArgumentResolver);
     }
