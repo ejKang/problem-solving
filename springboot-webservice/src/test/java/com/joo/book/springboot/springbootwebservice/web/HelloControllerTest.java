@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // 스프링 부트 테스트와 junit 사이에 연결자 역할
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = HelloController.class, excludeFilters = {
+@WebMvcTest(controllers = HelloController.class, excludeFilters = { // SecurityConfig의 설정을 읽을시 service 코드를 읽지 못함
         @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class) })
 // jpa 기능이 동작하지 않는 테스트 어노테이션
 // controller와 controllerAdvice 등 외부 연동과 관련된 부분만 활성화 된다
@@ -31,7 +31,7 @@ public class HelloControllerTest {
     private MockMvc mvc;
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "USER") // mock security 인스턴스 사용
     public void hello가_리턴된다() throws Exception {
         String hello = "hello";
 

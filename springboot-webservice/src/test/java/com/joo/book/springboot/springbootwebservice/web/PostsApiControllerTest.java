@@ -53,12 +53,13 @@ public class PostsApiControllerTest {
     private MockMvc mvc;
 
     @BeforeAll
-    public void setup() {
+    public void setup() { // test 시작전에 mockMvc 인스턴스 생성 
         mvc = MockMvcBuilders.webAppContextSetup(context).apply(SecurityMockMvcConfigurers.springSecurity()).build();
     }
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "USER") // 인증된 모의 사용자를 만들어서 사용
+                                  // MockMvc에서만 작동
     public void Posts_등록된다() throws Exception {
 
         String title = "title";
@@ -70,6 +71,7 @@ public class PostsApiControllerTest {
         // ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url,
         // requestDto, Long.class);
 
+        // 생성된 MockMvc를 통해 api를 테스트
         mvc.perform(MockMvcRequestBuilders.post(url).contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(requestDto)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
