@@ -1,11 +1,14 @@
 package com.joo.book.springboot.springbootwebservice.web.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class HelloResponseDto {
-    private final String name;
-    private final int amount;
+    private String name;
+    private int amount;
 }

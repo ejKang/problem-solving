@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.joo.book.springboot.springbootwebservice.domain.posts.Posts;
 import com.joo.book.springboot.springbootwebservice.domain.posts.PostsRepository;
+import com.joo.book.springboot.springbootwebservice.web.dto.HelloResponseDto;
 import com.joo.book.springboot.springbootwebservice.web.dto.PostsListResponseDto;
 import com.joo.book.springboot.springbootwebservice.web.dto.PostsResponseDto;
 import com.joo.book.springboot.springbootwebservice.web.dto.PostsSaveRequestDto;
@@ -73,6 +74,22 @@ public class PostsService {
         // System.out.println(dto1);
         // log.info(dto1.toString());
         log.info(dto1);
+        return test;
+    }
+
+    public Long get2() {
+        Long test = 1L;
+        String URL = "http://localhost:8080/hello/dto?name={name}&amount={amount}";
+        // String URL = "http://localhost:8080/hello";
+        Map<String, String> param = new HashMap<>();
+        param.put("name", "ss");
+        param.put("amount", "33");
+        HelloResponseDto dto1 = restTemplate.getForObject(URL, HelloResponseDto.class, param);
+        // restTemplate.getforobj
+        // String dto1 = restTemplate.getForObject(URL, String.class, param);
+        // System.out.println(dto1);
+        // log.info(dto1.toString());
+        log.info(dto1.toString());
         return test;
     }
 

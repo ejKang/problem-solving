@@ -46,4 +46,9 @@ public class PostsApiController {
     public Long getTest() {
         return postsService.get();
     }
+
+    @GetMapping("/api/v1/posts2")
+    public Long getTest2() {
+        return postsService.get2();
+    }
 }

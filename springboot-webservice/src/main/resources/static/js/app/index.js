@@ -16,6 +16,10 @@ var main = {
         $('#btn-rest-template').on('click', function () {
             _this.resttemplate();
         });
+
+        $('#btn-rest-template2').on('click', function () {
+            _this.resttemplate2();
+        });
     },
     save: function () {
         var data = {
@@ -83,6 +87,26 @@ var main = {
         $.ajax({
             type: 'GET',
             url: '/api/v1/posts',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8'
+        }).done(function () {
+            alert('rest template ');
+            // window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+
+    resttemplate2: function () {
+        var data = {
+            title: "d",
+            author: "dd",
+            content: "ee"
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: '/api/v1/posts2',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
         }).done(function () {
