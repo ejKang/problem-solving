@@ -16,21 +16,19 @@ public class CombinationSum {
         Collections.sort(candi);
 
         bt(rst, new ArrayList<>(), target, candi);
-        return null;
+        return rst;
     }
 
     private void bt(List<List<Integer>> rst, List<Integer> list, int target, List<Integer> candidates) {
-        int t = list.stream().reduce(0, (a, b) -> a + b);
-        System.out.println("t" + t);
-        if (t == target) {
+        if (0 == target) {
             rst.add(new ArrayList<>(list));
-        } else if (t > target) {
-            // do nothings
         } else {
 
             for (int i : candidates) {
+                if (i > target) {
+                    break;
+                }
                 List<Integer> tt = candidates.stream().filter(can -> can >= i).collect(Collectors.toList());
-                System.out.println("tt" + tt.toString());
                 int temp = target - i;
                 list.add(i);
                 bt(rst, list, temp, tt);
