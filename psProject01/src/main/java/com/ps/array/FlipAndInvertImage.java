@@ -5,7 +5,7 @@ public class FlipAndInvertImage {
     public int[][] flipAndInvertImage(int[][] image) {
         
         int len = image[0].length;
-        boolean isEven = ((len % 2) == 0)? true : false;
+        // boolean isEven = ((len % 2) == 0)? true : false;
         int half = len / 2;
         for (int i = 0; i < image.length; i++) {
 

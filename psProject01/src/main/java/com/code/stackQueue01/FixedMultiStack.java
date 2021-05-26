@@ -15,6 +15,8 @@ public class FixedMultiStack {
     }
 
     public void push(int stackNum, int value) {
+            values[stackNum] = value;
+            sizes[stackNum] = value;
 
     }
 
@@ -38,7 +40,7 @@ public class FixedMultiStack {
         return true;
     }
 
-    private int indexOfTop(int stackNum) {
+    public int indexOfTop(int stackNum) {
         return 0;
     }
 
