@@ -14,9 +14,26 @@ public class CombinationSum {
             candi.add(i);
         }
         Collections.sort(candi);
-
         bt(rst, new ArrayList<>(), target, candi);
+
+        bt2(rst, new ArrayList<>(), candidates, target, 0);
         return rst;
+    }
+
+    private void bt2(List<List<Integer>> rst, List<Integer> list, int[] nums, int remain, int startIdx) {
+        if (remain < 0) {
+            return;
+        } else if (remain == 0) {
+            rst.add(new ArrayList<>(list));
+        } else {
+            for (int i = startIdx; i < nums.length; i++) {
+                int temp = remain - nums[i];
+                list.add(nums[i]);
+                bt2(rst, list, nums, temp, i);
+                list.remove(list.size() - 1);
+            }
+        }
+
     }
 
     private void bt(List<List<Integer>> rst, List<Integer> list, int target, List<Integer> candidates) {
