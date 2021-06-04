@@ -6,6 +6,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CombinationSum {
+    public static void main(String[] args) {
+        int[] a = { 2, 3, 6, 7 };
+
+        CombinationSum c = new CombinationSum();
+        List<List<Integer>> b = c.combinationSum2(a, 7);
+
+        for (List<Integer> d : b) {
+            System.out.println(d);
+        }
+    }
+
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> rst = new ArrayList<>();
 
@@ -53,4 +64,29 @@ public class CombinationSum {
             }
         }
     }
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> rst = new ArrayList<>();
+
+        backtracking(rst, new ArrayList<Integer>(), candidates, target, 0);
+        return rst;
+    }
+
+    public void backtracking(List<List<Integer>> rst, List<Integer> list, int[] candidates, int target, int idx) {
+
+        if (target == 0) {
+            rst.add(new ArrayList<>(list));
+            return;
+        } else if (target < 0) {
+            return;
+        }
+
+        for (int i = idx; i < candidates.length; i++) {
+            list.add(candidates[i]);
+            backtracking(rst, list, candidates, target - candidates[i], i);
+            list.remove(list.size() - 1);
+        }
+
+    }
+
 }
