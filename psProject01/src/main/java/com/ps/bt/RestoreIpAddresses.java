@@ -4,6 +4,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RestoreIpAddresses {
+    public List<String> restoreIpAddresses1(String s) {
+        List<String> rst = new ArrayList<>();
+        bt(rst, s, "", 0, 0);
+        return rst;
+    }
+
+    private void bt(List<String> rst, String s, String temp, int idx, int depth) {
+        if (s.length() == idx && depth == 4) {
+
+            rst.add(temp.substring(0, temp.length() - 1));
+            return;
+        }
+
+        if (depth > 4) {
+            return;
+        }
+
+        for (int i = 1; i < 4; i++) {
+            if (idx + i > s.length()) {
+                return;
+            }
+            String p = s.substring(idx, idx + i);
+            int pp = Integer.parseInt(p);
+            if (p.startsWith("0") && p.length() > 1) {
+                return;
+            }
+            if (pp > 255) {
+                continue;
+            }
+            bt(rst, s, temp + s.substring(idx, idx + i) + ".", idx + i, depth + 1);
+        }
+    }
+
     public List<String> restoreIpAddresses(String s) {
         List<String> rst = new ArrayList<>();
 
@@ -71,7 +104,7 @@ public class RestoreIpAddresses {
 
     public static void main(String[] args) {
         RestoreIpAddresses ii = new RestoreIpAddresses();
-        List<String> ss = ii.restoreIpAddresses("25525511135");
+        List<String> ss = ii.restoreIpAddresses1("25525511135");
         System.out.println(ss.toString());
     }
 }
