@@ -4,7 +4,7 @@ public class ClimbStair {
 
     public static void main(String[] args) {
         ClimbStair cs = new ClimbStair();
-        System.out.println(cs.climbStairs(3));
+        System.out.println(cs.climbStairs1(3));
     }
 
     public int climbStairs(int n) {
@@ -41,5 +41,34 @@ public class ClimbStair {
         int n2 = df(n - 2, t);
         t[n] = n2 + n1;
         return n1 + n2;
+    }
+
+    public int climbStairs1(int n) {
+        int[] cntArr = new int[n + 1];
+        int rst = dynamicProgramming(n, cntArr);
+        return rst;
+    }
+
+    private int dynamicProgramming(int n, int[] cntArr) {
+
+        if (n <= 0) {
+            return 0;
+        }
+
+        if (n == 1) {
+            return 1;
+        }
+
+        if (n == 2) {
+            return 2;
+        }
+
+        if (cntArr[n] != 0) {
+            return cntArr[n];
+        }
+        int temp = dynamicProgramming(n - 1, cntArr) + dynamicProgramming(n - 2, cntArr);
+        cntArr[n] = temp;
+
+        return temp;
     }
 }
