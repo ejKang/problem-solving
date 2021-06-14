@@ -38,4 +38,34 @@ public class MinCostClimingStairs {
         return t[len];
     }
 
+    public int minCostClimbingStairs1(int[] cost) {
+
+        int[] sum = new int[cost.length];
+        sum[0] = cost[0];
+        sum[1] = cost[1];
+
+        dynamicprogrammin(cost, sum, cost.length - 1);
+        int temp = Math.min(sum[cost.length - 1], sum[cost.length - 2]);
+        return temp;
+    }
+
+    private void dynamicprogrammin(int[] cost, int[] sum, int i) {
+
+        if (i < 0 || i == 1 || i == 0) {
+            return;
+        }
+
+        if (sum[i] != 0) {
+            return;
+        }
+
+        if (sum[i - 1] == 0) {
+            dynamicprogrammin(cost, sum, i - 1);
+        }
+        if (sum[i - 2] == 0) {
+            dynamicprogrammin(cost, sum, i - 2);
+        }
+
+        sum[i] = Math.min(sum[i - 1], sum[i - 2]) + cost[i];
+    }
 }
