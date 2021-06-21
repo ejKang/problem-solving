@@ -23,25 +23,27 @@ public class PathSum2_113 {
             return;
         }
 
-        if (node.val == targetSum) {
+        if (node.val == targetSum && Objects.isNull(node.right) && Objects.isNull(node.left)) {
             list.add(node.val);
             rst.add(new ArrayList<>(list));
+            list.remove(list.size() - 1);
             return;
         }
 
+        list.add(node.val);
         if (!Objects.isNull(node.right)) {
-            list.add(node.right.val);
-            bt(rst, list, node.right, targetSum - node.right.val);
-            list.remove(list.size() - 1);
+            // list.add(node.right.val);
+            bt(rst, list, node.right, targetSum - node.val);
+            // list.remove(list.size() - 1);
 
         }
 
         if (!Objects.isNull(node.left)) {
-            list.add(node.left.val);
-            bt(rst, list, node.left, targetSum - node.left.val);
-            list.remove(list.size() - 1);
+            // list.add(node.left.val);
+            bt(rst, list, node.left, targetSum - node.val);
+            // list.remove(list.size() - 1);
 
         }
-
+        list.remove(list.size() - 1);
     }
 }
