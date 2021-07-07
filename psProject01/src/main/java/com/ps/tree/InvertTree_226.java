@@ -5,7 +5,7 @@ import java.util.Stack;
 
 import com.ps.base.TreeNode;
 
-public class InvertTree {
+public class InvertTree_226 {
 
     public TreeNode invertTree(TreeNode root) {
 
