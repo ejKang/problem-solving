@@ -37,4 +37,64 @@ public class IsSymmetric_101 {
         }
         return rst;
     }
+
+    public boolean isSymmetric2_iterative(TreeNode root) {
+
+        Stack<TreeNode> tree = new Stack<>();
+        Stack<TreeNode> mirror = new Stack<>();
+
+        tree.push(root.right);
+        mirror.push(root.left);
+
+        while (tree.size() > 0 && mirror.size() > 0) {
+            TreeNode treetemp = tree.pop();
+            TreeNode mirrortemp = mirror.pop();
+
+            if (treetemp == null && mirrortemp == null) {
+                continue;
+            }
+
+            if (treetemp == null || mirrortemp == null) {
+                return false;
+            }
+
+            if (treetemp.val != mirrortemp.val) {
+                return false;
+            }
+
+            tree.push(treetemp.left);
+            mirror.push(mirrortemp.right);
+
+            tree.push(treetemp.right);
+            mirror.push(mirrortemp.left);
+
+        }
+
+        return true;
+    }
+
+    public boolean isSymmetric_recursive(TreeNode root) {
+
+        TreeNode right = root.right;
+        TreeNode left = root.left;
+
+        return recursive(right, left);
+    }
+
+    private boolean recursive(TreeNode right, TreeNode left) {
+
+        if (right == null && left == null) {
+            return true;
+        }
+
+        if (right == null || left == null) {
+            return false;
+        }
+
+        boolean valRst = right.val == left.val;
+        boolean rRst = recursive(right.right, left.left);
+        boolean lRst = recursive(right.left, left.right);
+
+        return valRst && rRst && lRst;
+    }
 }
