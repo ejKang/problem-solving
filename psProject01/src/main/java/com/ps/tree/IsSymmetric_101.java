@@ -4,7 +4,7 @@ import java.util.Stack;
 
 import com.ps.base.TreeNode;
 
-public class IsSymmetric {
+public class IsSymmetric_101 {
 
     public boolean isSymmetric(TreeNode root) {
 
