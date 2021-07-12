@@ -46,4 +46,16 @@ public class InvertTree_226 {
         recursive(node.right);
         recursive(node.left);
     }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(3);
+        root.right = node3;
+        root.left = node2;
+
+        InvertTree_226 ii = new InvertTree_226();
+        ii.invertTreeRecursive(root);
+
+    }
 }
