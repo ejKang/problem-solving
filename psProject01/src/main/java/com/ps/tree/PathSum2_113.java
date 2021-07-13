@@ -76,4 +76,55 @@ public class PathSum2_113 {
         list.remove(list.size() - 1);
 
     }
+
+    public List<List<Integer>> pathSum_iterative(TreeNode root, int targetSum) {
+
+        List<List<Integer>> rst = new ArrayList<>();
+
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> list = new ArrayList<>();
+
+        TreeNode curr = root;
+        TreeNode pre = null;
+        int sum = 0;
+
+        while (!stack.isEmpty() || curr != null) {
+            while (curr != null) {
+                stack.push(curr);
+                list.add(curr.val);
+
+                sum += curr.val;
+                curr = curr.left;
+            }
+
+            curr = stack.peek();
+            if (curr.right != null && curr.right != pre) {
+                curr = curr.right;
+                continue;
+            }
+
+            if (curr.left == null && curr.right == null && sum == targetSum) {
+                rst.add(new ArrayList<>(list));
+            }
+
+            pre = stack.pop();
+            list.remove(list.size() - 1);
+            sum -= pre.val;
+            curr = null;
+        }
+
+        return rst;
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(3);
+        root.right = node3;
+        root.left = node2;
+
+        PathSum2_113 ii = new PathSum2_113();
+        ii.pathSum_iterative(root, 4);
+
+    }
 }
