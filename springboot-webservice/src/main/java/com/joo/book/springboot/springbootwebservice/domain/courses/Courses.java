@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.joo.book.springboot.springbootwebservice.domain.students.Students;
@@ -25,7 +26,10 @@ public class Courses {
     @Column
     private String name;
     
-    @OneToOne(mappedBy = "course")
+//    @OneToOne(mappedBy = "course")
+//    private Students student;
+    
+    @ManyToOne
     private Students student;
     
     @Builder
@@ -33,7 +37,8 @@ public class Courses {
         this.name = name;
     }
 
-    public void update(String name) {
+    public void update(String name, Students student) {
     	this.name = name;
+    	this.student = student;
     }
 }

@@ -20,23 +20,27 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Students {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @Column
-    private String name;
-    
-    @OneToOne
-    private Courses course;
-    
-    @Builder
-    public Students(String name) {
-        this.name = name;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    public void update(String name, Courses course) {
-    	this.name = name;
-    	this.course = course;
-    }
+	@Column
+	private String name;
+
+//    @OneToOne
+//    private Courses course;
+
+	@Builder
+	public Students(String name) {
+		this.name = name;
+	}
+
+//    public void update(String name, Courses course) {
+//    	this.name = name;
+//    	this.course = course;
+//    }
+
+	public void update(String name) {
+		this.name = name;
+	}
 }

@@ -5,10 +5,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.joo.book.springboot.springbootwebservice.domain.courses.Courses;
 import com.joo.book.springboot.springbootwebservice.domain.courses.CoursesRepository;
-import com.joo.book.springboot.springbootwebservice.domain.posts.Posts;
 import com.joo.book.springboot.springbootwebservice.domain.students.Students;
 import com.joo.book.springboot.springbootwebservice.domain.students.StudentsRepository;
-import com.joo.book.springboot.springbootwebservice.web.dto.PostsSaveRequestDto;
+import com.joo.book.springboot.springbootwebservice.web.dto.StudentsSaveRequestDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,12 +23,12 @@ public class StudentsService {
 	private final CoursesRepository coursesRepository;
 	
 	@Transactional
-    public Long save(PostsSaveRequestDto requestDto) {
+    public Long save(StudentsSaveRequestDto requestDto) {
 		
-		Students students = new Students("aa");
-		Courses courses = new Courses("bb");
-		students.update("bb", courses);
-		coursesRepository.save(courses);
+		Students students = new Students(requestDto.getName());
+//		Courses courses = new Courses("bb");
+//		students.update("bb", courses);
+//		coursesRepository.save(courses);
 		
 		
         return studentsRepository.save(students).getId();

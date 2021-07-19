@@ -5,6 +5,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.joo.book.springboot.springbootwebservice.domain.courses.Courses;
 import com.joo.book.springboot.springbootwebservice.domain.courses.CoursesRepository;
+import com.joo.book.springboot.springbootwebservice.domain.posts.Posts;
+import com.joo.book.springboot.springbootwebservice.domain.students.Students;
+import com.joo.book.springboot.springbootwebservice.domain.students.StudentsRepository;
+import com.joo.book.springboot.springbootwebservice.web.dto.PostsUpdateRequestDto;
+import com.joo.book.springboot.springbootwebservice.web.dto.StudentsSaveRequestDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,11 +22,32 @@ import lombok.extern.slf4j.Slf4j;
 public class CoursesService {
 	
 	private final CoursesRepository coursesRepository;
-
+	private final StudentsRepository studentsRepository;
+	
+	@Transactional
+    public Long save(StudentsSaveRequestDto requestDto) {
+		
+		Courses courses = new Courses(requestDto.getName());
+		
+        return coursesRepository.save(courses).getId();
+    }
+	
 	@Transactional
 	public void delete(Long id) {
 		Courses course = coursesRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 수업이 없습니다. id = " + id));
 		coursesRepository.delete(course);
 	}
+	
+    @Transactional
+    public Long update(Long id, StudentsSaveRequestDto requestDto) {
+    	Courses posts = coursesRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
+    	
+    	Students student = studentsRepository.findById(1L)
+    			.orElseThrow(() -> new IllegalArgumentException("해당 학생 없습니다. id = " + id));
+    	
+        posts.update(requestDto.getName(), student);
+        return id;
+    }
 }

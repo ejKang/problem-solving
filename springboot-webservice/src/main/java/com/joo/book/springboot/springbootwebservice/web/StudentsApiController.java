@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.joo.book.springboot.springbootwebservice.service.courses.CoursesService;
 import com.joo.book.springboot.springbootwebservice.service.students.StudentsService;
-import com.joo.book.springboot.springbootwebservice.web.dto.PostsSaveRequestDto;
+import com.joo.book.springboot.springbootwebservice.web.dto.StudentsSaveRequestDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,13 +15,13 @@ import lombok.RequiredArgsConstructor;
 @RestController
 public class StudentsApiController {
 
-    private final CoursesService coursesService;
+    private final StudentsService stuentsService;
 
-//    @PostMapping("/api/v1/courses")
-//    public Long save(@RequestBody PostsSaveRequestDto requestDto) {
-//
-//        return coursesService.save(requestDto);
-//    }
+    @PostMapping("/api/v1/students")
+    public Long save(@RequestBody StudentsSaveRequestDto requestDto) {
+
+        return stuentsService.save(requestDto);
+    }
 
 //    @PutMapping("/api/v1/posts/{id}")
 //    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
@@ -33,9 +32,9 @@ public class StudentsApiController {
 //        return stuentsService.findById(id);
 //    }
 //
-    @DeleteMapping("/api/v1/courses/{id}")
+    @DeleteMapping("/api/v1/students/{id}")
     public Long delete(@PathVariable Long id) {
-        coursesService.delete(id);
+        stuentsService.delete(id);
         return id;
     }
 
