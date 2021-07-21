@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 public class StudentsSaveRequestDto {
 
     private String name;
+    private Long courseId;
+    private Long studentId;
 
     @Builder
     public StudentsSaveRequestDto(String name, String content, String author) {

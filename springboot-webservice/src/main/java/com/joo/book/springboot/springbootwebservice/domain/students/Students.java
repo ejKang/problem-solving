@@ -1,11 +1,14 @@
 package com.joo.book.springboot.springbootwebservice.domain.students;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.joo.book.springboot.springbootwebservice.domain.courses.Courses;
@@ -30,6 +33,9 @@ public class Students {
 //    @OneToOne
 //    private Courses course;
 
+	@OneToMany(mappedBy = "student")
+	private List<Courses> course;
+	
 	@Builder
 	public Students(String name) {
 		this.name = name;
