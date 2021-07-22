@@ -30,25 +30,42 @@ public class CoursesRepositoryTest {
 
     @AfterAll
     public void cleanup() {
-    	coursesRepository.deleteAll();
-    	studentsRepository.deleteAll();
+//    	studentsRepository.deleteAll();
+//    	coursesRepository.deleteAll();
+    	
     }
 
+//    @Test
+//    public void 코스와학생매핑() {
+//    	
+//    	String courseName = "aa";
+//    	
+//        Courses course = Courses.builder().name("aa1").build();
+//        Students student = Students.builder().name("eejj1").build();
+//        
+//        studentsRepository.save(student);
+//        
+//        course.update(courseName, student);
+//        coursesRepository.save(course);
+//
+//        assertThat(course.getName()).isEqualTo(courseName);
+//        assertThat(course.getStudent().getId()).isNotNull();
+//
+//    }
+    
     @Test
-    public void 코스와학생매핑() {
+    public void 코스와학생매핑_ManyToMany() {
     	
-    	String courseName = "aa";
+    	String studentsName = "aa";
     	
         Courses course = Courses.builder().name("aa1").build();
         Students student = Students.builder().name("eejj1").build();
         
+        coursesRepository.save(course);
+        
+        student.update(studentsName, course);
         studentsRepository.save(student);
         
-        course.update(courseName, student);
-        coursesRepository.save(course);
-
-        assertThat(course.getName()).isEqualTo(courseName);
-        assertThat(course.getStudent().getId()).isNotNull();
-
+        assertThat(student.getName()).isEqualTo(studentsName);
     }
 }
