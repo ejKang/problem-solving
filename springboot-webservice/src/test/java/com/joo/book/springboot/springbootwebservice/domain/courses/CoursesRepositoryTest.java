@@ -2,8 +2,6 @@ package com.joo.book.springboot.springbootwebservice.domain.courses;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -12,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.joo.book.springboot.springbootwebservice.domain.posts.Posts;
-import com.joo.book.springboot.springbootwebservice.domain.posts.PostsRepository;
 import com.joo.book.springboot.springbootwebservice.domain.students.Students;
 import com.joo.book.springboot.springbootwebservice.domain.students.StudentsRepository;
 
@@ -31,46 +27,74 @@ public class CoursesRepositoryTest {
     @AfterAll
     public void cleanup() {
 //    	coursesRepository.deleteAll();
-    	studentsRepository.deleteAll();
+//    	studentsRepository.deleteAll();
     	
     	
     }
 
 //    @Test
-//    public void 코스와학생매핑() {
+//    public void 코스와학생매핑_OneToMany_코스가주인() {
 //    	
-//    	String courseName = "aa";
-//    	
-//        Courses course = Courses.builder().name("aa1").build();
-//        Students student = Students.builder().name("eejj1").build();
+//        Courses course = Courses.builder().name("meth").build();
+//        Courses courseEng = Courses.builder().name("eng").build();
+//        Students student = Students.builder().name("ej").build();
 //        
 //        studentsRepository.save(student);
+//        student.getCourse().add(course);
+//        student.getCourse().add(courseEng);
 //        
-//        course.update(courseName, student);
+//        course.updateStudent(student);
+//        courseEng.updateStudent(student);
+//        
 //        coursesRepository.save(course);
+//        coursesRepository.save(courseEng);
 //
-//        assertThat(course.getName()).isEqualTo(courseName);
 //        assertThat(course.getStudent().getId()).isNotNull();
-//
+//        
+//        coursesRepository.delete(course);
+//        coursesRepository.delete(courseEng);
+//    }
+    
+//    @Test
+//    public void 코스와학생매핑_ManyToMany() {
+//    	
+//    	String studentsName = "ts";
+//    	
+//        Courses course = Courses.builder().name("meth").build();
+//        Courses courseEng = Courses.builder().name("eng").build();
+//        
+//        Students student = Students.builder().name("ej").build();
+//        
+//        coursesRepository.save(course);
+//        coursesRepository.save(courseEng);
+//        
+//        student.update(studentsName, course);
+//        student.update(studentsName, courseEng);
+//        studentsRepository.save(student);
+//        
+//        assertThat(student.getName()).isEqualTo(studentsName);
 //    }
     
     @Test
-    public void 코스와학생매핑_ManyToMany() {
-    	
-    	String studentsName = "ts";
+    public void 코스와학생매핑_OneToMany_코스가주인_Cascade() {
     	
         Courses course = Courses.builder().name("meth").build();
         Courses courseEng = Courses.builder().name("eng").build();
-        
         Students student = Students.builder().name("ej").build();
+        
+        studentsRepository.save(student);
+        student.getCourse().add(course);
+        student.getCourse().add(courseEng);
+        
+        course.updateStudent(student);
+        courseEng.updateStudent(student);
         
         coursesRepository.save(course);
         coursesRepository.save(courseEng);
+
+        assertThat(course.getStudent().getId()).isNotNull();
         
-        student.update(studentsName, course);
-        student.update(studentsName, courseEng);
-        studentsRepository.save(student);
-        
-        assertThat(student.getName()).isEqualTo(studentsName);
+        studentsRepository.delete(student);
+
     }
 }
