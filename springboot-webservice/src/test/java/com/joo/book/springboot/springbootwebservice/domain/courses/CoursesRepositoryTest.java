@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.joo.book.springboot.springbootwebservice.domain.posts.Posts;
+import com.joo.book.springboot.springbootwebservice.domain.posts.PostsRepository;
 import com.joo.book.springboot.springbootwebservice.domain.students.Students;
 import com.joo.book.springboot.springbootwebservice.domain.students.StudentsRepository;
 
@@ -24,6 +26,9 @@ public class CoursesRepositoryTest {
     @Autowired
     StudentsRepository studentsRepository;
 
+    @Autowired
+    PostsRepository postsRepository;
+    
     @AfterAll
     public void cleanup() {
 //    	coursesRepository.deleteAll();
@@ -91,6 +96,39 @@ public class CoursesRepositoryTest {
         
         coursesRepository.save(course);
         coursesRepository.save(courseEng);
+
+        assertThat(course.getStudent().getId()).isNotNull();
+        
+        studentsRepository.delete(student);
+
+    }
+    
+    @Test
+    public void 학생과포스트_코스매핑_Cascade() {
+    	
+        Courses course = Courses.builder().name("meth").build();
+        Courses courseEng = Courses.builder().name("eng").build();
+        Students student = Students.builder().name("ej").build();
+        Posts postA = Posts.builder().title("tt").content("cc").author("aa").build();
+        Posts postB = Posts.builder().title("ttq").content("ccq").author("aaq").build();
+        
+        studentsRepository.save(student);
+        student.getCourse().add(course);
+        student.getCourse().add(courseEng);
+        student.getPost().add(postA);
+        student.getPost().add(postB);
+        
+        course.updateStudent(student);
+        courseEng.updateStudent(student);
+        
+        coursesRepository.save(course);
+        coursesRepository.save(courseEng);
+        
+        postA.updateStudent(student);
+        postB.updateStudent(student);
+        
+        postsRepository.save(postA);
+        postsRepository.save(postB);
 
         assertThat(course.getStudent().getId()).isNotNull();
         

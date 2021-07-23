@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.joo.book.springboot.springbootwebservice.domain.courses.Courses;
+import com.joo.book.springboot.springbootwebservice.domain.posts.Posts;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -45,11 +46,11 @@ public class Students {
 //		this.name = name;
 //	}
 	
-	@Builder
-	public Students(String name) {
-		this.name = name;
-		this.course = new HashSet<>();
-	}
+//	@Builder
+//	public Students(String name) {
+//		this.name = name;
+//		this.course = new HashSet<>();
+//	}
 
 //    public void update(String name, Courses course) {
 //    	this.name = name;
@@ -64,4 +65,14 @@ public class Students {
 //		this.name = name;
 //		this.course.add(course);
 //	}
+	
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+	private Set<Posts> post;
+	
+	@Builder
+	public Students(String name) {
+		this.name = name;
+		this.course = new HashSet<>();
+		this.post = new HashSet<>();
+	}
 }

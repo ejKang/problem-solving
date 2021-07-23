@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import com.joo.book.springboot.springbootwebservice.domain.BaseTimeEntity;
+import com.joo.book.springboot.springbootwebservice.domain.students.Students;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -40,4 +42,12 @@ public class Posts extends BaseTimeEntity {
         this.title = title;
         this.content = content;
     }
+    
+    
+    @ManyToOne
+    private Students student;
+
+	public void updateStudent(Students student) {
+		this.student = student;
+	}
 }
