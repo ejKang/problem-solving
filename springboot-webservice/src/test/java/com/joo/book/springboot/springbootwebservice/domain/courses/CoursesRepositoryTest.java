@@ -30,8 +30,9 @@ public class CoursesRepositoryTest {
 
     @AfterAll
     public void cleanup() {
-//    	studentsRepository.deleteAll();
 //    	coursesRepository.deleteAll();
+    	studentsRepository.deleteAll();
+    	
     	
     }
 
@@ -56,14 +57,18 @@ public class CoursesRepositoryTest {
     @Test
     public void 코스와학생매핑_ManyToMany() {
     	
-    	String studentsName = "aa";
+    	String studentsName = "ts";
     	
-        Courses course = Courses.builder().name("aa1").build();
-        Students student = Students.builder().name("eejj1").build();
+        Courses course = Courses.builder().name("meth").build();
+        Courses courseEng = Courses.builder().name("eng").build();
+        
+        Students student = Students.builder().name("ej").build();
         
         coursesRepository.save(course);
+        coursesRepository.save(courseEng);
         
         student.update(studentsName, course);
+        student.update(studentsName, courseEng);
         studentsRepository.save(student);
         
         assertThat(student.getName()).isEqualTo(studentsName);
