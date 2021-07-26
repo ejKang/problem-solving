@@ -3,16 +3,15 @@ package com.joo.book.springboot.springbootwebservice.domain.students;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import com.joo.book.springboot.springbootwebservice.domain.courses.Courses;
-import com.joo.book.springboot.springbootwebservice.domain.posts.Posts;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -33,24 +32,24 @@ public class Students {
 //    @OneToOne
 //    private Courses course;
 
-	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+//	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
 //	@OneToMany(mappedBy = "student")
-	private Set<Courses> course;
-
-//	@ManyToMany
-//	@JoinTable
 //	private Set<Courses> course;
+
+	@ManyToMany
+	@JoinTable
+	private Set<Courses> course;
 
 //	@Builder
 //	public Students(String name) {
 //		this.name = name;
 //	}
 	
-//	@Builder
-//	public Students(String name) {
-//		this.name = name;
-//		this.course = new HashSet<>();
-//	}
+	@Builder
+	public Students(String name) {
+		this.name = name;
+		this.course = new HashSet<>();
+	}
 
 //    public void update(String name, Courses course) {
 //    	this.name = name;
@@ -61,18 +60,18 @@ public class Students {
 //		this.name = name;
 //	}
 
-//	public void update(String name, Courses course) {
-//		this.name = name;
-//		this.course.add(course);
-//	}
-	
-	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-	private Set<Posts> post;
-	
-	@Builder
-	public Students(String name) {
+	public void update(String name, Courses course) {
 		this.name = name;
-		this.course = new HashSet<>();
-		this.post = new HashSet<>();
+		this.course.add(course);
 	}
+	
+//	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+//	private Set<Posts> post;
+	
+//	@Builder
+//	public Students(String name) {
+//		this.name = name;
+//		this.course = new HashSet<>();
+//		this.post = new HashSet<>();
+//	}
 }
