@@ -11,8 +11,10 @@ import com.joo.book.springboot.springbootwebservice.domain.students.Students;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class StudentCourse {
