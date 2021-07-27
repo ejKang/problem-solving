@@ -47,7 +47,7 @@ public class CoursesService {
     	Students student = studentsRepository.findById(requestDto.getStudentId())
     			.orElseThrow(() -> new IllegalArgumentException("해당 학생 없습니다. id = " + id));
     	
-        posts.update(requestDto.getName(), student);
+//        posts.update(requestDto.getName(), student);
         return id;
     }
 }
