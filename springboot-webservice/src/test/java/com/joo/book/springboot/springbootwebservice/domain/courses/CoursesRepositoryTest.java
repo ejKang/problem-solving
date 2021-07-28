@@ -1,5 +1,7 @@
 package com.joo.book.springboot.springbootwebservice.domain.courses;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -39,6 +41,22 @@ public class CoursesRepositoryTest {
     	
     }
 
+    @Test
+    public void 코스와학생매핑_oneToone() {
+    	String studentName = "jun";
+    	String courseName = "meth";
+    	
+    	Courses course = Courses.builder().name(courseName).build();
+    	Students student = Students.builder().name(studentName).build();
+    	
+    	coursesRepository.save(course);
+    	student.update(studentName, course);
+    	studentsRepository.save(student);
+    	
+    	Students ss = studentsRepository.findById(student.getId()).get();
+    	assertThat(ss.getCourse().getName().equals(courseName));
+    	
+    }
 //    @Test
 //    public void 코스와학생매핑_OneToMany_코스가주인() {
 //    	
@@ -144,37 +162,37 @@ public class CoursesRepositoryTest {
 //
 //    }
     
-	@Test
-	public void 코스와학생매핑_ManyToMany_Separate() {
-    	String studentsName = "ts";
-    	
-        Courses course = Courses.builder().name("meth").build();
-        Courses courseEng = Courses.builder().name("eng").build();
-        
-        Students student = Students.builder().name("ej").build();
-        
-        coursesRepository.save(course);
-        coursesRepository.save(courseEng);
-        
-//        student.update(studentsName, course);
-//        student.update(studentsName, courseEng);
-        studentsRepository.save(student);
-        
-        StudentCourse mapping1 = new StudentCourse();
-        mapping1.setStudent(student);
-        mapping1.setCourse(course);
-        scRepository.save(mapping1);
-        
-        StudentCourse mapping2 = new StudentCourse();
-        mapping2.setStudent(student);
-        mapping2.setCourse(courseEng);
-        scRepository.save(mapping2);
-        
-      Students tt = studentsRepository.findById(student.getId()).get();
-      
-      for (StudentCourse c : tt.getCourse()) {
-      	System.out.println(c.getCourse().getName());
-      }
-      
-	}
+//	@Test
+//	public void 코스와학생매핑_ManyToMany_Separate() {
+//    	String studentsName = "ts";
+//    	
+//        Courses course = Courses.builder().name("meth").build();
+//        Courses courseEng = Courses.builder().name("eng").build();
+//        
+//        Students student = Students.builder().name("ej").build();
+//        
+//        coursesRepository.save(course);
+//        coursesRepository.save(courseEng);
+//        
+////        student.update(studentsName, course);
+////        student.update(studentsName, courseEng);
+//        studentsRepository.save(student);
+//        
+//        StudentCourse mapping1 = new StudentCourse();
+//        mapping1.setStudent(student);
+//        mapping1.setCourse(course);
+//        scRepository.save(mapping1);
+//        
+//        StudentCourse mapping2 = new StudentCourse();
+//        mapping2.setStudent(student);
+//        mapping2.setCourse(courseEng);
+//        scRepository.save(mapping2);
+//        
+//      Students tt = studentsRepository.findById(student.getId()).get();
+//      
+//      for (StudentCourse c : tt.getCourse()) {
+//      	System.out.println(c.getCourse().getName());
+//      }
+//      
+//	}
 }
