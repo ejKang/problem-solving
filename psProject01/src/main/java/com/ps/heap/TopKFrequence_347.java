@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-public class TopKFrequence {
+public class TopKFrequence_347 {
     
     public static void main(String[] args) {
         
         int [] nums = {1,1,1,2,2,3};
-        int [] rst = TopKFrequence.topKFrequent(nums, 2);
+        int [] rst = TopKFrequence_347.topKFrequent(nums, 2);
 
         for (int i : rst) {
             System.out.print(i + ", ");
