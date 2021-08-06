@@ -1,6 +1,9 @@
 package com.joo.book.springboot.springbootwebservice.domain.courses;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
@@ -50,35 +53,30 @@ public class CoursesRepositoryTest {
     	Students student = Students.builder().name(studentName).build();
     	
     	coursesRepository.save(course);
-    	student.update(studentName, course);
+//    	student.update(studentName, course);
     	studentsRepository.save(student);
     	
     	Students ss = studentsRepository.findById(student.getId()).get();
-    	assertThat(ss.getCourse().getName().equals(courseName));
+//    	assertThat(ss.getCourse().getName().equals(courseName));
     	
     }
-//    @Test
-//    public void 코스와학생매핑_OneToMany_코스가주인() {
-//    	
-//        Courses course = Courses.builder().name("meth").build();
-//        Courses courseEng = Courses.builder().name("eng").build();
-//        Students student = Students.builder().name("ej").build();
-//        
-//        studentsRepository.save(student);
-//        student.getCourse().add(course);
-//        student.getCourse().add(courseEng);
-//        
-//        course.updateStudent(student);
-//        courseEng.updateStudent(student);
-//        
-//        coursesRepository.save(course);
-//        coursesRepository.save(courseEng);
-//
-//        assertThat(course.getStudent().getId()).isNotNull();
-//        
-//        coursesRepository.delete(course);
-//        coursesRepository.delete(courseEng);
-//    }
+    @Test
+    public void 코스와학생매핑_OneToMany_코스가주인() {
+    	
+        Courses course = Courses.builder().name("METH").build();
+        Courses courseEng = Courses.builder().name("ENG").build();
+        Students student = Students.builder().name("Jon").build();
+        
+        studentsRepository.save(student);
+        
+        course.updateStudent(student);
+        courseEng.updateStudent(student);
+        
+        coursesRepository.save(course);
+        coursesRepository.save(courseEng);
+
+        assertThat(course.getStudent().getId()).isNotNull();
+    }
     
 //    @Test
 //    public void 코스와학생매핑_ManyToMany() {
