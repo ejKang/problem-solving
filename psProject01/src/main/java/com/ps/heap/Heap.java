@@ -111,7 +111,7 @@ public class Heap {
         heap.print();
         System.out.println("");
 
-        for (int a : arr) {
+        for (int i = 0; i < arr.length; i++) {
 
             System.out.print(heap.pop() + ",");
         }
