@@ -2,7 +2,7 @@ package com.ps.greedy;
 
 import java.util.Arrays;
 
-public class MaximumUnits {
+public class MaximumUnits_1710 {
 
     public int maximumUnits(int[][] boxTypes, int truckSize) {
 
