@@ -10,10 +10,10 @@ public class InitCommand implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		// do somethings ..
-		System.out.println("#######################################");
-		for (String str : args) {
-			System.out.println(str);
-		}
+		System.out.println("##CommandLineRunner##");
+//		for (String str : args) {
+//			System.out.println(str);
+//		}
 		
 	}
 
