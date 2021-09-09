@@ -2,33 +2,60 @@ package com.ps.queue;
 
 public class MyCircularQueue_622 {
 
-    public MyCircularQueue_622(int k) {
+    private int[] arr;
+    private int front = -1;
+    private int rear = -1;
 
+    private int size;
+    private int currentSize;
+
+    public MyCircularQueue_622(int k) {
+        arr = new int[k];
+        size = k;
+        currentSize = 0;
     }
 
     public boolean enQueue(int value) {
+        if (currentSize == size) {
+            return false;
+        }
+        rear = (rear + 1) % size;
+        arr[rear] = value;
+        currentSize++;
+
         return true;
     }
 
     public boolean deQueue() {
-
+        if (currentSize == 0) {
+            return false;
+        }
+        front = (front + 1) % size;
+        currentSize--;
+        
         return true;
     }
 
     public int Front() {
-        return 0;
+        if (isEmpty()) {
+            return -1;
+        }
+        return arr[front];
     }
 
     public int Rear() {
-        return 0;
+        if (isEmpty()) {
+            return -1;
+        }
+        return arr[rear];
     }
 
     public boolean isEmpty() {
-        return true;
+        return currentSize == 0 ? true : false;
     }
 
     public boolean isFull() {
-        return true;
+        return currentSize == size ? true : false;
     }
 
 }
