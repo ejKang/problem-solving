@@ -3,7 +3,7 @@ package com.ps.queue;
 public class MyCircularQueue_622 {
 
     private int[] arr;
-    private int front = -1;
+    private int front = 0;
     private int rear = -1;
 
     private int size;
@@ -16,7 +16,7 @@ public class MyCircularQueue_622 {
     }
 
     public boolean enQueue(int value) {
-        if (currentSize == size) {
+        if (isFull()) {
             return false;
         }
         rear = (rear + 1) % size;
@@ -27,12 +27,12 @@ public class MyCircularQueue_622 {
     }
 
     public boolean deQueue() {
-        if (currentSize == 0) {
+        if (isEmpty()) {
             return false;
         }
         front = (front + 1) % size;
         currentSize--;
-        
+
         return true;
     }
 
