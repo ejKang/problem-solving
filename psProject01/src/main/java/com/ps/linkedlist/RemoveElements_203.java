@@ -23,4 +23,26 @@ public class RemoveElements_203 {
             return node;
         }
     }
+
+    public ListNode removeElements_2(ListNode head, int val) {
+
+        ListNode temp = new ListNode(0, head);
+
+        ListNode current = head;
+        ListNode prev = temp;
+
+        while (current != null) {
+            if (current.val == val) {
+                prev.next = current.next;
+                current = current.next;
+            } else {
+                prev = current;
+                current = current.next;
+            }
+        }
+
+        return temp.next;
+
+    }
+
 }
