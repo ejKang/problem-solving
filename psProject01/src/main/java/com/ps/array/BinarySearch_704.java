@@ -2,6 +2,7 @@ package com.ps.array;
 
 public class BinarySearch_704 {
 
+    // time complex O(logN)
     public int search(int[] nums, int target) {
 
         int left = 0;
