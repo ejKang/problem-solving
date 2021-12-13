@@ -1,6 +1,8 @@
 package com.ps.array;
 
 public class MergeSortedArray_88 {
+
+    // time complex O(M + N)
     public void merge(int[] nums1, int m, int[] nums2, int n) {
 
         int nums1Idx = m - 1;
