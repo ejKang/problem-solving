@@ -7,7 +7,7 @@ public class QuickSort {
     public static void main(String[] args) {
 
         QuickSort quick = new QuickSort();
-        int[] arr = { 3, 2, 5, 4, 7, 6, 8 };
+        int[] arr = { 9, 2, 5, 4, 7, 6, 8 };
 
         System.out.println("Before : ");
         System.out.println(Arrays.toString(arr));
@@ -17,6 +17,7 @@ public class QuickSort {
         System.out.println(Arrays.toString(arr));
     }
 
+    // time complex O(nlogn)
     private void quicksort(int[] arr, int left, int right) {
         if (left < right) {
             int pivot = partition(arr, left, right);
@@ -37,12 +38,14 @@ public class QuickSort {
                 hight--;
             }
 
-            while (arr[low] < pivot && low < hight) {
+            while (arr[low] <= pivot && hight > low) {
                 low++;
             }
 
             swap(hight, low, arr);
         }
+
+        swap(left, low, arr);
         return low;
     }
 
