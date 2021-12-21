@@ -2,6 +2,7 @@ package com.ps.array;
 
 public class FindPeakElement_162 {
 
+    // time complex - o(logN) binary search
     public int findPeakElement(int[] nums) {
 
         int left = 0;
