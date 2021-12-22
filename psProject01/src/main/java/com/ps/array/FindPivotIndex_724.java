@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class FindPivotIndex_724 {
 
+    // sliding window - o(n)
     public int pivotIndex(int[] nums) {
 
         int totalSum = Arrays.stream(nums).sum();
@@ -17,8 +18,8 @@ public class FindPivotIndex_724 {
 
             if (totalSum == leftSum) {
                 return pivot;
-            } 
-            leftSum+= nums[i];
+            }
+            leftSum += nums[i];
         }
 
         return -1;
