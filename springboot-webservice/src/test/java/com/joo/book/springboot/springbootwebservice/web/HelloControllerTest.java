@@ -6,16 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.joo.book.springboot.springbootwebservice.config.auth.SecurityConfig;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -47,5 +50,17 @@ public class HelloControllerTest {
         mvc.perform(get("/hello/dto").param("name", name).param("amount", String.valueOf(amount)))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.name", is(name)))
                 .andExpect(jsonPath("$.amount", is(amount)));
+    }
+    
+    @Test
+    @WithMockUser(roles = "USER")
+    void exception_handler() throws Exception {
+    	
+    	mvc.perform(get("/error"))
+    	.andDo(print())
+    	.andExpect(rst -> assertThat(rst.getResolvedException())
+    			.isInstanceOf(IllegalArgumentException.class))
+    	.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+    	.andExpect(status().is5xxServerError());
     }
 }
