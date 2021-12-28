@@ -2,6 +2,7 @@ package com.ps.array;
 
 public class ShortestUnSortedContinuousSubArray_581 {
 
+    // time complex - o(n), space complex - o(1)
     public int findUnsortedSubarray(int[] nums) {
 
         boolean found = false;
@@ -9,13 +10,11 @@ public class ShortestUnSortedContinuousSubArray_581 {
         for (int i = 1; i <= nums.length - 1; i++) {
 
             if (!found) {
-                //
                 if (nums[i] < nums[i - 1]) {
                     found = true;
                     min = nums[i];
                 }
-            } else {
-                // find minimum
+            } else { // find minimum
                 if (min >= nums[i]) {
                     min = nums[i];
                 }
@@ -25,9 +24,7 @@ public class ShortestUnSortedContinuousSubArray_581 {
         int l = 0;
         if (!found) {
             return 0;
-        } else {
-            // find start index
-
+        } else { // find start index
             for (int i = 0; i < nums.length; i++) {
                 if (nums[i] > min) {
                     break;
@@ -58,10 +55,7 @@ public class ShortestUnSortedContinuousSubArray_581 {
             }
             h--;
         }
-        System.out.println("min = " + min);
-        System.out.println("max = " + max);
-        System.out.println("l = " + l);
-        System.out.println("h = " + h);
+
         return h - l + 1;
     }
 }
