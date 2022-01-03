@@ -19,14 +19,14 @@ public class FindPeakElement_162 {
         return right;
     }
 
-    public int findPeakElement_2(int[] nums) { // !! failed
+    public int findPeakElement_2(int[] nums) {
 
         int i = 0;
         int j = nums.length - 1;
 
         int pivot = 0;
         while (j > i) {
-            pivot = (j + i) / 2;
+            pivot = (i + j) / 2;
 
             if (nums[pivot] < nums[pivot + 1]) {
                 i = pivot + 1;
@@ -34,7 +34,6 @@ public class FindPeakElement_162 {
                 j = pivot;
             }
         }
-
         return i;
     }
 }
