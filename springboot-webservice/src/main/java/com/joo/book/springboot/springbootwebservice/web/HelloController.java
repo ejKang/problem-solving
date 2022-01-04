@@ -1,7 +1,13 @@
 package com.joo.book.springboot.springbootwebservice.web;
 
+import com.joo.book.springboot.springbootwebservice.exception.ResponseError;
 import com.joo.book.springboot.springbootwebservice.web.dto.HelloResponseDto;
 
+import java.time.LocalDateTime;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,4 +31,10 @@ public class HelloController {
     public void test() {
     	throw new IllegalArgumentException("test error");
     }
+    
+//	@ExceptionHandler(Exception.class)
+//	public ResponseEntity<?> handle(Exception ex) {
+//
+//		return new ResponseEntity<>(new ResponseError(LocalDateTime.now(), "error"), HttpStatus.INTERNAL_SERVER_ERROR);
+//	}
 }

@@ -5,6 +5,8 @@ import com.joo.book.springboot.springbootwebservice.config.auth.dto.SessionUser;
 import com.joo.book.springboot.springbootwebservice.service.posts.PostsService;
 import com.joo.book.springboot.springbootwebservice.web.dto.PostsResponseDto;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,5 +42,14 @@ public class IndexController {
         model.addAttribute("post", dto);
         return "posts-update";
     }
-
+    
+    @GetMapping("/1")
+    public String indexTest1(Model model, @AuthenticationPrincipal UserDetails user) {
+        model.addAttribute("posts", PostsService.findAllDesc());
+        
+        if (user != null) { 
+            model.addAttribute("userName", user.getUsername());
+        }
+        return "index";
+    }
 }
