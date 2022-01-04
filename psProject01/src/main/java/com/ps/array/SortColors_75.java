@@ -2,6 +2,7 @@ package com.ps.array;
 
 public class SortColors_75 {
 
+    // time complex - o(n)
     public void sortColors(int[] nums) {
         int i = 0;
         int j = nums.length - 1;
