@@ -13,6 +13,7 @@ public class FindDuplicate_287 {
 
         // }
 
+        // time complex - o(n), space complex - o(1)
         for (int i = 0; i < nums.length; i++) {
             int tmp = Math.abs(nums[i]);
             if (nums[tmp] < 0) {
