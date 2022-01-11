@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class TwoSum_1 {
 
+    // time complexity - o(n)
     public int[] twoSum(int[] nums, int target) {
 
         Map<Integer, Integer> map = new HashMap<>();
