@@ -10,8 +10,8 @@ public class ThreeSumSmaller_259 {
         System.out.println(aa.threeSumSmaller(arr, 2));
     }
 
+    // time complexity - o(n2)
     public int threeSumSmaller(int[] nums, int target) {
-
         Arrays.sort(nums);
         int rst = 0;
         int j, k;
