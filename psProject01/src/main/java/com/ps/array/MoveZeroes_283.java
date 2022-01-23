@@ -19,4 +19,15 @@ public class MoveZeroes_283 {
         nums[i] = nums[idx];
         nums[idx] = tmp;
     }
+
+    public void moveZeroes_2(int[] nums) {
+        int idx = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) { // important
+                swap(nums, i, idx);
+                idx++;
+            }
+        }
+
+    }
 }
