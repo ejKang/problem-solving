@@ -9,6 +9,7 @@ public class SearchMatrix_74 {
         s.searchMatrix(a, 0);
     }
 
+    // time complexity - o(logm+n)
     public boolean searchMatrix(int[][] matrix, int target) {
 
         int i = 0, j = matrix.length - 1;
