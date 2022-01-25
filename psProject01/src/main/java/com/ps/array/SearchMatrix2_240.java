@@ -2,6 +2,7 @@ package com.ps.array;
 
 public class SearchMatrix2_240 {
 
+    // time complexity - o(m+n)
     public boolean searchMatrix(int[][] matrix, int target) {
         int x = matrix[0].length - 1;
         int y = 0;
