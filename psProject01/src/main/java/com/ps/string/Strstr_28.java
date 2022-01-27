@@ -2,6 +2,7 @@ package com.ps.string;
 
 public class Strstr_28 {
 
+    // time complexity o(n)
     public int strStr(String haystack, String needle) {
 
         int needleLen = needle.length();
