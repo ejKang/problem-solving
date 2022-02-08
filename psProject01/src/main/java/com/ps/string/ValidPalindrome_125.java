@@ -7,6 +7,7 @@ public class ValidPalindrome_125 {
         a.isPalindrome("race a car");
     }
 
+    // time complexity - o(n)
     public boolean isPalindrome(String s) {
         int i = 0;
         int j = s.length() - 1;
