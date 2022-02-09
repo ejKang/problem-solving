@@ -28,4 +28,24 @@ public class SortColors_75 {
         nums[i] = nums[j];
         nums[j] = tmp;
     }
+
+    public void sortColors_2(int[] nums) {
+        int i = 0, j = nums.length - 1;
+
+        int p = 0;
+
+        while (p <= j) {
+
+            if (nums[p] == 0) {
+                swap(i, p, nums);
+                p++;
+                i++;
+            } else if (nums[p] == 2) {
+                swap(j, p, nums);
+                j--;
+            } else {
+                p++;
+            }
+        }
+    }
 }
