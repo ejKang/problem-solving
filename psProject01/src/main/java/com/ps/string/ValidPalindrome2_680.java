@@ -10,6 +10,7 @@ public class ValidPalindrome2_680 {
                 "aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga");
     }
 
+    // time complexity - o(n)
     public boolean validPalindrome(String s) {
 
         int i = 0;
