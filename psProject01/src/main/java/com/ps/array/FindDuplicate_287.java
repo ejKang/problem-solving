@@ -24,4 +24,30 @@ public class FindDuplicate_287 {
         }
         return -1;
     }
+
+    public int findDuplicate_2(int[] nums) {
+
+        // Set<Integer> set = new HashSet<>();
+
+        // for (int n : nums) {
+        // if (set.contains(n)) {
+        // return n;
+        // } else {
+        // set.add(n);
+        // }
+        // }
+        // return -1;
+
+        for (int i = 0; i < nums.length; i++) {
+            int tmp = Math.abs(nums[i]);
+
+            if (nums[tmp] < 0) {
+                return tmp;
+            } else {
+                nums[tmp] = -nums[tmp];
+            }
+        }
+
+        return -1;
+    }
 }
