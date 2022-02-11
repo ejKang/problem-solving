@@ -11,6 +11,7 @@ public class ThreeSumCloset_16 {
         System.out.println(a.threeSumClosest(nums, -1));
     }
 
+    // time complex - o(nlogn) + o(n2) -> o(n2)
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
 
@@ -37,4 +38,31 @@ public class ThreeSumCloset_16 {
         return rst;
     }
 
+    public int threeSumClosest_2(int[] nums, int target) {
+
+        Arrays.sort(nums);
+
+        int start = 0, end = nums.length - 1;
+        int rst = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length - 2; i++) {
+
+            start = i + 1;
+            end = nums.length - 1;
+
+            while (end > start) {
+
+                int tmp = nums[i] + nums[start] + nums[end];
+                if (Math.abs(target - tmp) < Math.abs(target - rst) || rst == Integer.MAX_VALUE) {
+                    rst = tmp;
+                }
+
+                if (tmp > target) {
+                    end--;
+                } else {
+                    start++;
+                }
+            }
+        }
+        return rst;
+    }
 }
