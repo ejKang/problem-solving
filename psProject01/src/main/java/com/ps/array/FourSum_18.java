@@ -8,6 +8,7 @@ import java.util.Set;
 
 public class FourSum_18 {
 
+    // time complexity - o(n3)
     public List<List<Integer>> fourSum(int[] nums, int target) {
         Arrays.sort(nums);
         int k, l;
@@ -42,4 +43,31 @@ public class FourSum_18 {
         return new ArrayList<>(rst);
     }
 
+    public List<List<Integer>> fourSum_2(int[] nums, int target) {
+
+        Arrays.sort(nums);
+
+        Set<List<Integer>> set = new HashSet<>();
+
+        for (int i = 0; i < nums.length - 3; i++) {
+            for (int j = i + 1; j < nums.length - 2; j++) {
+
+                int start = j + 1, end = nums.length - 1;
+
+                while (end > start) {
+
+                    int tmp = nums[i] + nums[j] + nums[start] + nums[end];
+                    if (tmp == target) {
+                        set.add(Arrays.asList(nums[i], nums[j], nums[start], nums[end]));
+                        start++;
+                    } else if (tmp < target) {
+                        start++;
+                    } else {
+                        end--;
+                    }
+                }
+            }
+        }
+        return new ArrayList<>(set);
+    }
 }
