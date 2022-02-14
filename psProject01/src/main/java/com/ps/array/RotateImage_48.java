@@ -32,11 +32,30 @@ public class RotateImage_48 {
         for (int y = 0; y < matrix.length / 2; y++) {
             for (int x = 0; x < (matrix.length + 1) / 2; x++) {
                 tmp = matrix[y][x];
-                int x1 = y, y1 = n-x;
-                int x2 = y1, y2 = n-x1;
-                int x3 = y2, y3 = n-x2;
+                int x1 = y, y1 = n - x;
+                int x2 = y1, y2 = n - x1;
+                int x3 = y2, y3 = n - x2;
 
                 matrix[y][x] = matrix[y1][x1];
+                matrix[y1][x1] = matrix[y2][x2];
+                matrix[y2][x2] = matrix[y3][x3];
+                matrix[y3][x3] = tmp;
+            }
+        }
+    }
+
+    public void rotate_2(int[][] matrix) {
+
+        int n = matrix.length - 1;
+        for (int i = 0; i < matrix.length / 2; i++) {
+
+            for (int j = 0; j < (matrix.length + 1) / 2; j++) {
+                int tmp = matrix[i][j];
+                int x1 = i, y1 = n - j;
+                int x2 = y1, y2 = n - x1;
+                int x3 = y2, y3 = n - x2;
+
+                matrix[i][j] = matrix[y1][x1];
                 matrix[y1][x1] = matrix[y2][x2];
                 matrix[y2][x2] = matrix[y3][x3];
                 matrix[y3][x3] = tmp;
