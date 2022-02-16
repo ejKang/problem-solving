@@ -59,4 +59,27 @@ public class ValidPalindrome2_680 {
     public boolean isAlphabat(char c) {
         return c >= 'a' && c <= 'z';
     }
+
+    public boolean validPalindrome_2(String s) {
+
+        int i = 0, j = s.length() - 1;
+        return valid(s, i, j, 1);
+    }
+
+    private boolean valid(String s, int i, int j, int cnt) {
+
+        while (j > i) {
+            if (s.charAt(i) == s.charAt(j)) {
+                i++;
+                j--;
+            } else {
+                if (cnt == 0) {
+                    return false;
+                }
+
+                return valid(s, i + 1, j, cnt - 1) || valid(s, i, j - 1, cnt - 1);
+            }
+        }
+        return true;
+    }
 }

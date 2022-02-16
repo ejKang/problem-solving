@@ -1,7 +1,9 @@
 package com.ps.string;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class LongestSubString_3 {
 
@@ -46,5 +48,26 @@ public class LongestSubString_3 {
             rst = Math.max(rst, max);
         }
         return rst;
+    }
+
+    public int lengthOfLongestSubstring_2(String s) {
+
+        int i = 0, j = 0;
+        Set<Character> set = new HashSet<>();
+
+        int max = Integer.MIN_VALUE;
+        while (j < s.length()) {
+            char c = s.charAt(j);
+            if (!set.contains(c)) {
+                set.add(c);
+                j++;
+            } else {
+                max = Math.max(max, j - i);
+                set.remove(s.charAt(i));
+                i++;
+            }
+        }
+        max = Math.max(max, j - i);
+        return max;
     }
 }

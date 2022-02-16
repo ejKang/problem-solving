@@ -11,4 +11,14 @@ public class RotateString_796 {
         }
         return false;
     }
+
+    public boolean rotateString_2(String s, String goal) {
+
+        String ss = s + s;
+
+        if (s.length() == goal.length() && ss.contains(goal)) {
+            return true;
+        }
+        return false;
+    }
 }
