@@ -68,4 +68,16 @@ public class MinCostClimingStairs {
 
         sum[i] = Math.min(sum[i - 1], sum[i - 2]) + cost[i];
     }
+
+    public int minCostClimbingStairs2(int[] cost) {
+        int[] rst = new int[cost.length];
+        rst[0] = cost[0];
+        rst[1] = cost[1];
+
+        for (int i = 2; i < cost.length; i++) {
+            rst[i] = cost[i] + Math.min(rst[i - 1], rst[i - 2]);
+        }
+
+        return Math.min(rst[cost.length - 1], rst[cost.length - 2]);
+    }
 }
