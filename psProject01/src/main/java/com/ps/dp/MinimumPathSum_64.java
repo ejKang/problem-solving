@@ -38,6 +38,37 @@ public class MinimumPathSum_64 {
     }
 
     public int minPathSum_bottom_up(int[][] grid) {
-        return 0;
+
+        int y = grid.length;
+        int x = grid[0].length;
+        int[][] cost = new int[y][x];
+
+        cost[0][0] = grid[0][0];
+
+        for (int i = 0; i < y; i++) {
+
+            for (int j = 0; j < x; j++) {
+
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+
+                int tmpUp = Integer.MAX_VALUE;
+                int tmpLeft = Integer.MAX_VALUE;
+
+                // check upper side
+                if (i - 1 >= 0) {
+                    tmpUp = cost[i - 1][j];
+                }
+
+                if (j - 1 >= 0) {
+                    tmpLeft = cost[i][j - 1];
+                }
+
+                cost[i][j] = grid[i][j] + Math.min(tmpLeft, tmpUp);
+            }
+        }
+
+        return cost[y - 1][x - 1];
     }
 }
