@@ -50,4 +50,38 @@ public class ClimbingStairs_70 {
         }
 
     }
+
+    public int climbStairs_2_bottom_up(int n) {
+
+        if (n <= 1) {
+            return n;
+        }
+        int[] rst = new int[n];
+        rst[0] = 1;
+        rst[1] = 2;
+
+        for (int i = 2; i < n; i++) {
+            rst[i] = rst[i - 1] + rst[i - 2];
+        }
+        return rst[n - 1];
+    }
+
+    public int climbStairs_2_top_down(int n) {
+        int[] rst = new int[n + 1];
+        rst[1] = 1;
+        rst[2] = 2;
+
+        return dp(rst, n);
+    }
+
+    private int dp(int[] rst, int n) {
+        if (rst[n] > 0) {
+            return rst[n];
+        }
+
+        rst[n - 1] = dp(rst, n - 1);
+        rst[n - 2] = dp(rst, n - 2);
+
+        return rst[n - 1] + rst[n - 2];
+    }
 }
