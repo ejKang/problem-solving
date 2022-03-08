@@ -71,4 +71,78 @@ public class MinimumPathSum_64 {
 
         return cost[y - 1][x - 1];
     }
+
+    public int minPathSum_2_bottom_up(int[][] grid) {
+
+        int x = grid[0].length;
+        int y = grid.length;
+
+        int[][] rst = new int[y][x];
+
+        for (int i = 0; i < y; i++) {
+            for (int j = 0; j < x; j++) {
+                if (i == 0 && j == 0) {
+                    rst[i][j] = grid[i][j];
+                } else if (i == 0) {
+                    rst[i][j] = grid[i][j] + rst[i][j - 1];
+                } else if (j == 0) {
+                    rst[i][j] = grid[i][j] + rst[i - 1][j];
+                } else {
+                    int tmp = Math.min(rst[i - 1][j], rst[i][j - 1]);
+                    rst[i][j] = grid[i][j] + tmp;
+                }
+
+            }
+        }
+        return rst[y - 1][x - 1];
+    }
+
+    public static void main(String[] args) {
+        MinimumPathSum_64 s = new MinimumPathSum_64();
+        int[][] grid = { { 1, 3, 1 }, { 1, 5, 1 }, { 4, 2, 1 } };
+        s.minPathSum_2_top_dowm(grid);
+    }
+
+    public int minPathSum_2_top_dowm(int[][] grid) {
+
+        int x = grid[0].length;
+        int y = grid.length;
+
+        int rst[][] = new int[y][x];
+        rst[0][0] = grid[0][0];
+
+        dp_2(grid, rst, y - 1, x - 1);
+
+        return rst[y - 1][x - 1];
+    }
+
+    private void dp_2(int[][] grid, int[][] rst, int y, int x) {
+
+        if (y < 0 || x < 0) {
+            return;
+        }
+
+        if (y == 0 && x == 0) {
+            return;
+        }
+
+        int tmpY = Integer.MAX_VALUE;
+        if (y - 1 >= 0) {
+            if (rst[y - 1][x] == 0) {
+                dp_2(grid, rst, y - 1, x);
+            }
+            tmpY = rst[y - 1][x];
+        }
+
+        int tmpX = Integer.MAX_VALUE;
+        if (x - 1 >= 0) {
+            if (rst[y][x - 1] == 0) {
+                dp_2(grid, rst, y, x - 1);
+            }
+            tmpX = rst[y][x - 1];
+        }
+
+        rst[y][x] = Math.min(tmpY, tmpX) + grid[y][x];
+
+    }
 }
