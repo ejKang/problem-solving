@@ -9,17 +9,18 @@ public class KnapSack {
     public static void main(String[] args) {
 
         int itemCnt = 4;
-        int totalValue = 7;
+        int totalWeight = 7;
 
         // weight = new int[itemCnt + 1];
         // value = new int[itemCnt + 1];
 
-        dp = new Integer[itemCnt][totalValue + 1];
+        dp = new Integer[itemCnt][totalWeight + 1];
 
         KnapSack topDown = new KnapSack();
-        System.out.println(topDown.knapsack_top_down(itemCnt - 1, totalValue));
-
-        topDown.knapsack_bottom_up();
+        System.out.println(topDown.knapsack_top_down(itemCnt - 1, totalWeight));
+        System.out.println(topDown.knapsack_2_top_down(itemCnt, totalWeight));
+        // topDown.knapsack_bottom_up();
+        System.out.println(topDown.knapsack_2_bottom_up(itemCnt, totalWeight));
     }
 
     public int knapsack_top_down(int itemCnt, int totalValue) {
@@ -63,4 +64,71 @@ public class KnapSack {
 
         System.out.println("bottom-up : " + dp[itemCnt][totalValue]);
     }
+
+    public int knapsack_2_top_down(int itemCnt, int totalWeight) {
+
+        int[] weight_2 = { 6, 4, 3, 5 };
+        int[] value_2 = { 13, 8, 6, 12 };
+
+        Integer[][] rst = new Integer[itemCnt + 1][totalWeight + 1];
+
+        // dp(rst, itemCnt, totalWeight, weight_2, value_2);
+        // return rst[itemCnt][totalValue];
+        return dp(rst, itemCnt, totalWeight, weight_2, value_2);
+    }
+
+    private int dp(Integer[][] rst, int itemCnt, int totalWeight, int[] weight_2, int[] value_2) {
+        // System.out.println("itemCnt : " + itemCnt + " , totalWeight : " +
+        // totalWeight);
+
+        if (itemCnt <= 0 || totalWeight <= 0) {
+            return 0;
+        }
+
+        if (rst[itemCnt][totalWeight] == null) {
+
+            if (totalWeight - weight_2[itemCnt - 1] < 0) {
+                rst[itemCnt][totalWeight] = dp(rst, itemCnt - 1, totalWeight, weight_2, value_2);
+            } else {
+                int tmp1 = dp(rst, itemCnt - 1, totalWeight, weight_2, value_2);
+
+                int tmp2 = dp(rst, itemCnt - 1, totalWeight - weight_2[itemCnt - 1], weight_2, value_2);
+
+                rst[itemCnt][totalWeight] = Math.max(tmp1, tmp2 + value_2[itemCnt - 1]);
+            }
+
+        }
+        // System.out.println("itemCnt : " + itemCnt + " , totalWeight : " + totalWeight
+        // +
+        // " , rst[][] : " + rst[itemCnt][totalWeight]);
+        return rst[itemCnt][totalWeight];
+    }
+
+    public int knapsack_2_bottom_up(int itemCnt, int totalWeight) {
+
+        int[] weight_2 = { 6, 4, 3, 5 };
+        int[] value_2 = { 13, 8, 6, 12 };
+
+        Integer[][] rst = new Integer[itemCnt + 1][totalWeight + 1];
+
+        for (int item = 0; item <= itemCnt; item++) {
+            for (int wei = 0; wei <= totalWeight; wei++) {
+
+                if (wei == 0 || item == 0) {
+                    rst[item][wei] = 0;
+                    continue;
+                }
+                if (wei < weight_2[item - 1]) {
+                    rst[item][wei] = rst[item - 1][wei];
+                    continue;
+                } else {
+                    rst[item][wei] = Math.max(rst[item - 1][wei],
+                            rst[item - 1][wei - weight_2[item - 1]] + value_2[item - 1]);
+                }
+
+            }
+        }
+        return rst[itemCnt][totalWeight];
+    }
+
 }
