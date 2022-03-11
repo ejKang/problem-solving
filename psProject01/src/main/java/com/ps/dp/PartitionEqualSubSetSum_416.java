@@ -1,5 +1,7 @@
 package com.ps.dp;
 
+import java.util.Arrays;
+
 public class PartitionEqualSubSetSum_416 {
 
     public boolean canPartition(int[] nums) {
@@ -90,5 +92,68 @@ public class PartitionEqualSubSetSum_416 {
             }
         }
         return dp[nums.length][sum];
+    }
+
+    public boolean canPartition_4(int[] nums) {
+
+        int sum = Arrays.stream(nums).sum();
+
+        if (sum % 2 == 1) {
+            return false;
+        }
+        sum /= 2;
+
+        // boolean[] arr = new boolean[sum + 1];
+        // arr[0] = true;
+
+        // for (int i = 0; i < nums.length; i++) {
+        // for (int j = sum; j > 0; j--) {
+
+        // if (j - nums[i] >= 0) {
+        // arr[j] = arr[j] || arr[j - nums[i]];
+        // }
+        // }
+        // }
+
+        // return arr[sum];
+
+        boolean rst = dp_4(nums, sum, 0, 0);
+        System.out.println(rst);
+        // return rst;
+        int numLen = nums.length;
+        boolean[][] arr = new boolean[numLen + 1][sum + 1];
+
+        for (int i = 0; i <= numLen; i++) {
+
+            for (int j = 0; j <= sum; j++) {
+
+                if (i == 0 && j == 0) {
+                    arr[i][j] = true;
+                } else if (i == 0) {
+                    arr[i][j] = false;
+                } else if (j == 0 || arr[i - 1][j]) {
+                    arr[i][j] = true;
+                } else {
+                    if (j >= nums[i]) {
+                        arr[i][j] = arr[i - 1][j] || arr[i - 1][j - nums[i]];
+                    }
+                }
+            }
+        }
+
+        return arr[numLen][sum];
+    }
+
+    private boolean dp_4(int[] nums, int sum, int i, int tmpSum) {
+
+        if (tmpSum == sum) {
+            return true;
+        }
+        if (i == nums.length || tmpSum > sum) {
+            return false;
+        }
+
+        boolean rst = dp_4(nums, sum, i + 1, tmpSum + nums[i]) || dp_4(nums, sum, i + 1, tmpSum);
+        return rst;
     }
 }
