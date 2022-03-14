@@ -83,4 +83,42 @@ public class HouseRober2_213 {
         }
         return Math.max(curVisit, nonVisit);
     }
+
+    public int rob_3(int[] nums) {
+        int len = nums.length;
+
+        if (len == 1) {
+            return nums[0];
+        }
+        int tmp1 = dp_3(0, len - 2, nums);
+        int tmp2 = dp_3(1, len - 1, nums);
+        Math.max(tmp1, tmp2);
+
+        // solution 2
+        int[][] rst2 = new int[len + 1][2];
+        int tmp3 = dp_32(1, len - 1, nums, rst2, 0);
+        int tmp4 = dp_32(2, len, nums, rst2, 1);
+        return Math.max(tmp3, tmp4);
+    }
+
+    private int dp_32(int start, int end, int[] nums, int[][] rst2, int idx) {
+        rst2[start][idx] = nums[start - 1];
+        for (int i = start; i < end; i++) {
+            rst2[i + 1][idx] = Math.max(rst2[i - 1][idx] + nums[i], rst2[i][idx]);
+        }
+        return rst2[end][idx];
+    }
+
+    private int dp_3(int start, int end, int[] nums) {
+
+        int current = 0;
+        int previous = 0;
+
+        for (int i = start; i <= end; i++) {
+            int tmp = current;
+            current = Math.max(current, previous + nums[i]);
+            previous = tmp;
+        }
+        return Math.max(current, previous);
+    }
 }
