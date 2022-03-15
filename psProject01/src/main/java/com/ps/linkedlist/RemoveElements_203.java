@@ -45,4 +45,22 @@ public class RemoveElements_203 {
 
     }
 
+    public ListNode removeElements_3(ListNode head, int val) {
+
+        ListNode tmp = new ListNode(0, head);
+        ListNode curr = head;
+        ListNode prev = tmp;
+
+        while(curr != null) {
+            if (curr.val == val) {
+                curr = curr.next;
+                prev.next = curr;
+            } else {
+                prev = curr;
+                curr = curr.next;
+            }
+        }
+        return tmp.next;
+    }
+
 }
