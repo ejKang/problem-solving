@@ -50,4 +50,10 @@ public class JumpGame2_45 {
         }
         return cnt;
     }
+
+    public int jump_2(int[] nums) {
+
+        
+        return 0;
+    }
 }
