@@ -40,9 +40,6 @@ public class JumpGame2_45 {
         for (int i = 1; i <= len - 2; i++) {
             max = Math.max(max, i + nums[i]);
 
-            if (max == len - 1) {
-                return cnt;
-            }
             if (i == cur_limit) {
                 cnt++;
                 cur_limit = max;
@@ -53,7 +50,19 @@ public class JumpGame2_45 {
 
     public int jump_2(int[] nums) {
 
-        
-        return 0;
+        int max = nums[0];
+        int curmax = nums[0];
+        int cnt = 1;
+
+        for (int i = 1; i < nums.length; i++) {
+
+            max = Math.max(max, i + nums[i]);
+
+            if (i == curmax) {
+                cnt++;
+                curmax = max;
+            }
+        }
+        return cnt;
     }
 }
