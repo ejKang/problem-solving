@@ -127,4 +127,74 @@ public class PathSum2_113 {
         ii.pathSum_iterative(root, 4);
 
     }
+
+    public List<List<Integer>> pathSum_3(TreeNode root, int targetSum) {
+
+        List<List<Integer>> rst = new ArrayList<>();
+        List<Integer> tmp = new ArrayList<>();
+
+        recursive(rst, root, tmp, 0, targetSum);
+        return rst;
+    }
+
+    private void recursive(List<List<Integer>> rst, TreeNode node, List<Integer> tmp, int i, int targetSum) {
+
+        if (node == null) {
+            return;
+        }
+
+        tmp.add(node.val);
+        // i += node.val;
+
+        if (Objects.isNull(node.right) && Objects.isNull(node.left)) {
+            if (i + node.val == targetSum) {
+                rst.add(new ArrayList<>(tmp));
+            }
+        }
+
+        recursive(rst, node.left, tmp, i + node.val, targetSum);
+        recursive(rst, node.right, tmp, i + node.val, targetSum);
+
+        tmp.remove(tmp.size() - 1);
+
+    }
+
+    public List<List<Integer>> pathSum_3_iterative(TreeNode root, int targetSum) {
+
+        List<List<Integer>> rst = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+
+        stack.add(root);
+        List<Integer> tmp = new ArrayList<>();
+        int curSum = 0;
+
+        TreeNode cur = root;
+        TreeNode prev = null;
+
+        while (!stack.isEmpty() || cur != null) {
+            while (cur != null) {
+                stack.push(cur.left);
+                tmp.add(cur.val);
+                curSum += cur.val;
+                cur = cur.left;
+            }
+            cur = stack.peek();
+            if (cur.right != null && cur.right != prev) {
+                cur = cur.right;
+                continue;
+            }
+
+            if (cur.right == null && cur.left == null && curSum == targetSum) {
+                rst.add(new ArrayList<>(tmp));
+            }
+
+            prev = stack.pop();
+            tmp.remove(tmp.size() - 1);
+            curSum -= prev.val;
+            cur = null;
+
+        }
+
+        return rst;
+    }
 }
