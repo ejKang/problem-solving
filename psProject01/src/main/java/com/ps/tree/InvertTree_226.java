@@ -58,4 +58,42 @@ public class InvertTree_226 {
         ii.invertTreeRecursive(root);
 
     }
+
+    public TreeNode invertTree_2(TreeNode root) {
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.add(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode n = stack.pop();
+            if (n == null) {
+                continue;
+            }
+            TreeNode tmp = n.left;
+            n.left = n.right;
+            n.right = tmp;
+            stack.add(n.left);
+            stack.add(n.right);
+        }
+        return root;
+    }
+
+    public TreeNode invertTree_2_recursive(TreeNode root) {
+
+        recursive_2(root);
+        return root;
+    }
+
+    private void recursive_2(TreeNode n) {
+        if (n == null) {
+            return;
+        }
+
+        TreeNode tmp = n.left;
+        n.left = n.right;
+        n.right = tmp;
+
+        recursive_2(n.left);
+        recursive_2(n.right);
+    }
 }

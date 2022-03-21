@@ -1,5 +1,6 @@
 package com.ps.tree;
 
+import java.util.Objects;
 import java.util.Stack;
 
 import com.ps.base.TreeNode;
@@ -96,5 +97,70 @@ public class IsSymmetric_101 {
         boolean lRst = recursive(right.left, left.right);
 
         return valRst && rRst && lRst;
+    }
+
+    public boolean isSymmetric_2(TreeNode root) {
+
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<TreeNode> mirror = new Stack<>();
+
+        if (Objects.isNull(root.left) && Objects.isNull(root.right)) {
+            return true;
+        } else if (Objects.isNull(root.left) || Objects.isNull(root.right)) {
+            return false;
+        }
+        stack.add(root.left);
+        mirror.add(root.right);
+
+        while (!stack.isEmpty() && !mirror.isEmpty()) {
+            TreeNode n = stack.pop();
+            TreeNode m = mirror.pop();
+
+            if (n.val != m.val) {
+                return false;
+            }
+
+            if (Objects.isNull(n.left) && Objects.isNull(m.right)) {
+                continue;
+            } else if (Objects.isNull(n.left) || Objects.isNull(m.right)) {
+                return false;
+            } else {
+                stack.add(n.left);
+                mirror.add(m.right);
+            }
+
+            if (Objects.isNull(n.right) && Objects.isNull(m.left)) {
+                // continue;
+            } else if (Objects.isNull(n.right) || Objects.isNull(m.left)) {
+                return false;
+            } else {
+                stack.add(n.right);
+                mirror.add(m.left);
+            }
+
+        }
+        return true;
+    }
+
+    public boolean isSymmetric_2_recursive(TreeNode root) {
+
+        return recursive_2(root.left, root.right);
+    }
+
+    private boolean recursive_2(TreeNode left, TreeNode right) {
+
+        if (Objects.isNull(left) && Objects.isNull(right)) {
+            return true;
+        }
+
+        if (Objects.isNull(left) || Objects.isNull(right)) {
+            return false;
+        }
+
+        if (left.val != right.val) {
+            return false;
+        }
+
+        return recursive_2(left.left, right.right) && recursive_2(left.right, right.left);
     }
 }
