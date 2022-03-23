@@ -53,4 +53,39 @@ public class BinaryTreeInorderTraversal_94 {
 
         return list;
     }
+
+    public List<Integer> inorderTraversal_2(TreeNode root) {
+
+        List<Integer> list = new ArrayList<>();
+        inorderRecursive(list, root);
+
+        // iteration version
+        TreeNode cur = root;
+        Stack<TreeNode> stack = new Stack<>();
+        while (true) {
+            if (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            } else if (!stack.isEmpty()) {
+                TreeNode tmp = stack.pop();
+                list.add(tmp.val);
+                if (tmp.right != null) {
+                    // stack.push(tmp.right);
+                    cur = tmp.right;
+                }
+            } else {
+                break;
+            }
+        }
+        return list;
+    }
+
+    private void inorderRecursive(List<Integer> list, TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        inorderRecursive(list, node.left);
+        list.add(node.val);
+        inorderRecursive(list, node.right);
+    }
 }

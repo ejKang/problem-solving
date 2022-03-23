@@ -27,4 +27,26 @@ public class BalancedBinaryTree_110 {
 
         return Math.max(r, l) + 1;
     }
+
+    public boolean isBalanced_2(TreeNode root) {
+
+        int rst = balenceRecursive(root);
+        return rst == -1 ? false : true;
+    }
+
+    private int balenceRecursive(TreeNode node) {
+
+        if (node == null) {
+            return 0;
+        }
+
+        int left = balenceRecursive(node.left);
+        int right = balenceRecursive(node.right);
+
+        if (left == -1 || right == -1 || Math.abs(left - right) > 1) {
+            return -1;
+        } else {
+            return Math.max(left, right) + 1;
+        }
+    }
 }

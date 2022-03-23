@@ -37,4 +37,35 @@ public class UniqueBinarySearchTrees2_95 {
         }
         return list;
     }
+
+    public List<TreeNode> generateTrees_2(int n) {
+
+        return genRecursive(1, n);
+    }
+
+    private List<TreeNode> genRecursive(int start, int end) {
+        List<TreeNode> list = new ArrayList<>();
+
+        if (start == end) {
+            list.add(new TreeNode(start));
+            return list;
+        } else if (start > end) {
+            list.add(null);
+            return list;
+        }
+
+        for (int i = start; i <= end; i++) {
+            List<TreeNode> left = genRecursive(start, i - 1);
+            List<TreeNode> right = genRecursive(i + 1, end);
+
+            for (TreeNode l : left) {
+                for (TreeNode r : right) {
+                    TreeNode node = new TreeNode(i, l, r);
+                    list.add(node);
+                }
+            }
+        }
+
+        return list;
+    }
 }

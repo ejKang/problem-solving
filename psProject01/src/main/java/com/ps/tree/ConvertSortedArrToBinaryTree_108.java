@@ -20,4 +20,27 @@ public class ConvertSortedArrToBinaryTree_108 {
         newNode.left = recursive(nums, start, mid - 1);
         return newNode;
     }
+
+    public TreeNode sortedArrayToBST_2(int[] nums) {
+
+        TreeNode node = toBinarySearchTreeRecursive(nums, 0, nums.length - 1);
+        return node;
+
+    }
+
+    private TreeNode toBinarySearchTreeRecursive(int[] nums, int start, int end) {
+
+        if (start == end) {
+            return new TreeNode(nums[start]);
+        } else if (start > end) {
+            return null;
+        }
+
+        int mid = start + (end - start) / 2;
+        TreeNode node = new TreeNode(nums[mid]);
+        node.left = toBinarySearchTreeRecursive(nums, start, mid - 1);
+        node.right = toBinarySearchTreeRecursive(nums, mid + 1, end);
+
+        return node;
+    }
 }
