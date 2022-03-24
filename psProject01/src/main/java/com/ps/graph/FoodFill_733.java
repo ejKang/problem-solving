@@ -57,6 +57,51 @@ public class FoodFill_733 {
         FoodFill_733 fill = new FoodFill_733();
         int[][] image = { { 1, 1, 1 }, { 1, 1, 0 }, { 1, 0, 1 } };
         // image[0]={1,1,1};
-        fill.floodFill(image, 1, 1, 2);
+        // fill.floodFill(image, 1, 1, 2);
+        fill.floodFill_2(image, 1, 1, 2);
+    }
+
+    public int[][] floodFill_2(int[][] image, int sr, int sc, int newColor) {
+        int y = image.length;
+        int x = image[0].length;
+
+        boolean[][] visited = new boolean[y][x];
+        int oldColor = image[sr][sc];
+        // visited[sr][sc] = true;
+        recursive(image, visited, sr, sc, newColor, oldColor);
+        // for (int i = 0; i < y; i++) {
+        // for (int j = 0; j < x; j++) {
+
+        // }
+        // }
+        return image;
+    }
+
+    private void recursive(int[][] image, boolean[][] visited, int y, int x, int newColor, int oldColor) {
+
+        if (x >= 0 && x < image[0].length && y >= 0 && y < image.length) {
+
+            if (image[y][x] == oldColor && !visited[y][x]) {
+
+                visited[y][x] = true;
+                image[y][x] = newColor;
+
+                if (x - 1 >= 0 && x - 1 < image[0].length && y >= 0 && y < image.length && !visited[y][x - 1]) {
+                    recursive(image, visited, y, x - 1, newColor, oldColor);
+                }
+
+                if (x + 1 >= 0 && x + 1 < image[0].length && y >= 0 && y < image.length && !visited[y][x + 1]) {
+                    recursive(image, visited, y, x + 1, newColor, oldColor);
+                }
+
+                if (x >= 0 && x < image[0].length && y + 1 >= 0 && y + 1 < image.length && !visited[y + 1][x]) {
+                    recursive(image, visited, y + 1, x, newColor, oldColor);
+                }
+
+                if (x >= 0 && x < image[0].length && y - 1 >= 0 && y - 1 < image.length && !visited[y - 1][x]) {
+                    recursive(image, visited, y - 1, x, newColor, oldColor);
+                }
+            }
+        }
     }
 }
