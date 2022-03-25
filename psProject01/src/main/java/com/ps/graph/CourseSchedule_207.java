@@ -74,4 +74,44 @@ public class CourseSchedule_207 {
         return true;
     }
 
+    public static void main(String[] args) {
+        CourseSchedule_207 c = new CourseSchedule_207();
+        int[][] arr = { { 1, 4 }, { 2, 4 }, { 3, 1 }, { 3, 2 } };
+        System.out.println(c.canFinish_2(5, arr));
+    }
+
+    public boolean canFinish_2(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> graph = new ArrayList<>();
+        int[] indegree = new int[numCourses];
+
+        for (int i = 0; i < numCourses; i++) {
+            graph.add(new ArrayList<>());
+        }
+        for (int[] vertex : prerequisites) {
+            indegree[vertex[0]]++;
+            graph.get(vertex[1]).add(vertex[0]);
+        }
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (indegree[i] == 0) {
+                queue.add(i);
+            }
+        }
+        while (!queue.isEmpty()) {
+            int tmp = queue.poll();
+            for (int idx : graph.get(tmp)) {
+                indegree[idx]--;
+                if (indegree[idx] == 0) {
+                    queue.offer(idx);
+                }
+            }
+        }
+
+        for (int i = 0; i < numCourses; i++) {
+            if (indegree[i] > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

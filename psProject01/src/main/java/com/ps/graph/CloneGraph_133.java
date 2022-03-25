@@ -35,4 +35,30 @@ public class CloneGraph_133 {
 
         return copy;
     }
+
+    public Node cloneGraph_2(Node node) {
+
+        Map<Node, Node> map = new HashMap<>();
+        Node cloned = cloneRecursive(node, map);
+        return cloned;
+    }
+
+    private Node cloneRecursive(Node node, Map<Node, Node> map) {
+        if (node == null) {
+            return null;
+        }
+        Node copy = null;
+        if (map.containsKey(node)) {
+            copy = map.get(node);
+            // return map.get(node);
+        } else {
+            copy = new Node(node.val);
+            map.put(node, copy);
+            for (Node child : node.neighbors) {
+                copy.neighbors.add(cloneRecursive(child, map));
+            }
+        }
+
+        return copy;
+    }
 }
