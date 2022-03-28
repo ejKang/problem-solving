@@ -62,4 +62,33 @@ public class RedundantConnection_684 {
         }
         return false;
     }
+
+    public int[] findRedundantConnection_2(int[][] edges) {
+
+        int len = edges.length;
+        int[] parentArr = new int[len + 1];
+        for (int i = 0; i < parentArr.length; i++) {
+            parentArr[i] = i;
+        }
+
+        for (int[] edge : edges) {
+            int a = find_2(parentArr, edge[0]);
+            int b = find_2(parentArr, edge[1]);
+
+            if (a == b) {
+                return edge;
+            } else {
+                parentArr[edge[1]] = a;
+            }
+
+        }
+        return new int[0];
+    }
+
+    private int find_2(int[] parentArr, int i) {
+        if (parentArr[i] == i) {
+            return i;
+        }
+        return find_2(parentArr, parentArr[i]);
+    }
 }
