@@ -62,4 +62,32 @@ public class Permutations2_47 {
             }
         }
     }
+
+    public List<List<Integer>> permuteUnique_2(int[] nums) {
+
+        Set<List<Integer>> rst = new HashSet<>();
+        List<Integer> list = new ArrayList<>();
+        boolean[] visited = new boolean[nums.length];
+
+        bt(rst, nums, list, visited);
+        List<List<Integer>> r = new ArrayList<>(rst);
+        return r;
+    }
+
+    private void bt(Set<List<Integer>> rst, int[] nums, List<Integer> list, boolean[] visited) {
+        if (list.size() == nums.length) {
+            rst.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i = 0; i < visited.length; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                list.add(nums[i]);
+                bt(rst, nums, list, visited);
+                list.remove(list.size() - 1);
+                visited[i] = false;
+            }
+        }
+    }
 }

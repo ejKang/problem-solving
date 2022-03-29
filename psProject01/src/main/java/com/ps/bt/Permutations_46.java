@@ -27,4 +27,26 @@ public class Permutations_46 {
             tmp.remove(tmp.size() - 1);
         }
     }
+
+    public List<List<Integer>> permute_2(int[] nums) {
+        List<List<Integer>> rst = new ArrayList<>();
+        bt(rst, nums, new ArrayList<>());
+        return rst;
+    }
+
+    private void bt(List<List<Integer>> rst, int[] nums, List<Integer> tmp) {
+
+        if (tmp.size() == nums.length) {
+            rst.add(new ArrayList<>(tmp));
+            return;
+        }
+
+        for (int num : nums) {
+            if (!tmp.contains(num)) {
+                tmp.add(num);
+                bt(rst, nums, tmp);
+                tmp.remove(tmp.size() - 1);
+            }
+        }
+    }
 }
