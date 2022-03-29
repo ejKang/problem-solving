@@ -21,4 +21,16 @@ public class ArithmeticSlices_413 {
         }
         return Arrays.stream(dp).sum();
     }
+
+    public int numberOfArithmeticSlices_2(int[] nums) {
+        int len = nums.length;
+        int[] dp = new int[len];
+
+        for (int i = 2; i < len; i++) {
+            if (nums[i - 2] - nums[i - 1] == nums[i - 1] - nums[i]) {
+                dp[i] = dp[i - 1] + 1;
+            }
+        }
+        return Arrays.stream(dp).sum();
+    }
 }

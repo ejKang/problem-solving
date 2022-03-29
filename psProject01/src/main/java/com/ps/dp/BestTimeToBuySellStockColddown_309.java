@@ -24,4 +24,24 @@ public class BestTimeToBuySellStockColddown_309 {
 
         return sell[len - 1];
     }
+
+    public int maxProfit_2(int[] prices) {
+
+        int len = prices.length;
+        int[] buy = new int[len + 1];
+        int[] sell = new int[len + 1];
+
+        buy[0] = -prices[0];
+
+        for (int i = 1; i < len; i++) {
+            if (i == 1) {
+                buy[i] = Math.max(buy[i - 1], -prices[i]);
+            } else {
+                buy[i] = Math.max(buy[i - 1], sell[i - 2] - prices[i]);
+            }
+
+            sell[i] = Math.max(sell[i - 1], buy[i - 1] + prices[i]);
+        }
+        return sell[len - 1];
+    }
 }
