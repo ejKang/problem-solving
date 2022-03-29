@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-public class TopKFrequence_347 {
+public class TopKFrequence_347 { // 692, 973
     public static void main(String[] args) {
 
         int[] nums = { 1, 1, 1, 2, 2, 3 };
@@ -48,6 +48,31 @@ public class TopKFrequence_347 {
                 queue.poll();
             }
         }
+
+        int[] rst = new int[k];
+        for (int i = 0; i < k; i++) {
+            rst[i] = queue.poll().getKey();
+        }
+        return rst;
+    }
+
+    public int[] topKFrequent_2(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+        // PriorityQueue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>((a, b)
+        // -> b.getValue() - a.getValue());
+        PriorityQueue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>((a, b) -> a.getValue() - b.getValue());
+
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            queue.offer(entry);
+
+            if (queue.size() > k) {
+                queue.poll();
+            }
+        }
+        // queue.addAll(map.entrySet());
 
         int[] rst = new int[k];
         for (int i = 0; i < k; i++) {
