@@ -25,4 +25,26 @@ public class SubSets_78 {
         backtracking(i + 1, end, nums, rst, tmp);
         tmp.remove(tmp.size() - 1);
     }
+
+    public List<List<Integer>> subsets_2(int[] nums) {
+        List<List<Integer>> rst = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        int idx = 0;
+        bt(rst, nums, idx, list);
+        return rst;
+    }
+
+    private void bt(List<List<Integer>> rst, int[] nums, int idx, List<Integer> list) {
+
+        if (idx == nums.length) {
+            rst.add(new ArrayList<>(list));
+            return;
+        }
+
+        bt(rst, nums, idx + 1, list);
+
+        list.add(nums[idx]);
+        bt(rst, nums, idx + 1, list);
+        list.remove(list.size() - 1);
+    }
 }

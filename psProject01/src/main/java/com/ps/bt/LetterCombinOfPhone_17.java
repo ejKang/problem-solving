@@ -51,4 +51,26 @@ public class LetterCombinOfPhone_17 {
         }
 
     }
+
+    public List<String> letterCombinations_2(String digits) {
+        
+        List<String> rst = new ArrayList<>();
+        if (digits.length() == 0) {
+            return rst;
+        }
+        bt(rst, digits, 0, "");
+        return rst;
+    }
+
+    private void bt(List<String> rst, String digits, int idx, String str) {
+        if (idx == digits.length()) {
+            rst.add(new String(str));
+            return;
+        }
+        String key = phone.get(digits.substring(idx, idx + 1));
+
+        for (int i = 0; i < key.length(); i++) {
+            bt(rst, digits, idx + 1, str + key.substring(i, i + 1));
+        }
+    }
 }
