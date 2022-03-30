@@ -53,7 +53,7 @@ public class LetterCombinOfPhone_17 {
     }
 
     public List<String> letterCombinations_2(String digits) {
-        
+
         List<String> rst = new ArrayList<>();
         if (digits.length() == 0) {
             return rst;
@@ -71,6 +71,27 @@ public class LetterCombinOfPhone_17 {
 
         for (int i = 0; i < key.length(); i++) {
             bt(rst, digits, idx + 1, str + key.substring(i, i + 1));
+        }
+    }
+
+    public List<String> letterCombinations_3(String digits) {
+        List<String> rst = new ArrayList<>();
+        bt3(rst, digits, 0, "");
+        return rst;
+    }
+
+    private void bt3(List<String> rst, String digits, int i, String tmp) {
+
+        if (i == digits.length()) {
+            rst.add(new String(tmp));
+            return;
+        }
+        String key = digits.substring(i, i + 1);
+        String p = phone.get(key);
+
+        for (int j = 0; j < p.length(); j++) {
+            String s = p.substring(j, j+1);
+            bt3(rst, digits, i+1, tmp+s);
         }
     }
 }

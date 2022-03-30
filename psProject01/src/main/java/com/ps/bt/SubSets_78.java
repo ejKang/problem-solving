@@ -47,4 +47,25 @@ public class SubSets_78 {
         bt(rst, nums, idx + 1, list);
         list.remove(list.size() - 1);
     }
+
+    public List<List<Integer>> subsets_3(int[] nums) {
+
+        List<List<Integer>> rst = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        bt3(rst, nums, list, 0);
+        return rst;
+    }
+
+    private void bt3(List<List<Integer>> rst, int[] nums, List<Integer> list, int i) {
+        if (i == nums.length) {
+            rst.add(new ArrayList<>(list));
+            return;
+        }
+
+        bt3(rst, nums, list, i + 1);
+
+        list.add(nums[i]);
+        bt3(rst, nums, list, i + 1);
+        list.remove(list.size() - 1);
+    }
 }
