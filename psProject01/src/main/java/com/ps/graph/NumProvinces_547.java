@@ -1,4 +1,4 @@
-package com.ps.tree;
+package com.ps.graph;
 
 import java.util.Arrays;
 
@@ -32,7 +32,7 @@ public class NumProvinces_547 {
         }
     }
 
-    public int findCircleNum_2(int[][] isConnected) {
+    public int findCircleNum_union(int[][] isConnected) {
         int len = isConnected.length;
 
         int[] parent = new int[len];
