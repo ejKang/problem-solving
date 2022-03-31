@@ -47,4 +47,41 @@ public class PalindromePartitioning_131 {
         }
         return true;
     }
+
+    public List<List<String>> partition_2(String s) {
+        List<List<String>> rst = new ArrayList<>();
+        List<String> list = new ArrayList<>();
+        bt2(rst, list, s, 0);
+        return rst;
+    }
+
+    private void bt2(List<List<String>> rst, List<String> list, String s, int i) {
+        if (i == s.length()) {
+            rst.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int j = 1; (i + j) < s.length() + 1; j++) {
+            String tmp = s.substring(i, i + j);
+            if (isPalindrome2(tmp)) {
+                list.add(tmp);
+                bt2(rst, list, s, i + j);
+                list.remove(list.size() - 1);
+            }
+
+        }
+    }
+
+    private boolean isPalindrome2(String tmp) {
+        int start = 0;
+        int last = tmp.length() - 1;
+        while (last > start) {
+            if (tmp.charAt(start) != tmp.charAt(last)) {
+                return false;
+            }
+            start++;
+            last--;
+        }
+        return true;
+    }
 }

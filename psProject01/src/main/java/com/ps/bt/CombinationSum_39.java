@@ -32,4 +32,32 @@ public class CombinationSum_39 {
             tmp.remove(tmp.size() - 1);
         }
     }
+
+    public List<List<Integer>> combinationSum_2(int[] candidates, int target) {
+
+        Set<List<Integer>> setRst = new HashSet<>();
+        List<Integer> list = new ArrayList<>();
+
+        bt(setRst, candidates, target, list, 0, 0);
+        return new ArrayList<>(setRst);
+    }
+
+    private void bt(Set<List<Integer>> setRst, int[] candidates, int target, List<Integer> list, int sum,
+            int startIdx) {
+
+        if (sum == target) {
+            setRst.add(new ArrayList<>(list));
+            return;
+        } else if (sum > target) {
+            return;
+        }
+
+        for (int i = startIdx; i < candidates.length; i++) {
+            int tmp = candidates[i];
+            list.add(tmp);
+            bt(setRst, candidates, target, list, sum + tmp, i);
+            list.remove(list.size() - 1);
+        }
+
+    }
 }
