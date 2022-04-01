@@ -1,5 +1,6 @@
 package com.ps.graph;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -88,6 +89,35 @@ public class KeysAndRooms_841 {
 
         for (int i : rooms.get(idx)) {
             recursive(rooms, visited, i);
+        }
+    }
+
+    public boolean canVisitAllRooms_3(List<List<Integer>> rooms) {
+        int len = rooms.size();
+        boolean[] visited = new boolean[len];
+        visited[0] = true;
+
+        for (int key : rooms.get(0)) {
+            backtracking(rooms, visited, key);
+        }
+
+        for (boolean b : visited) {
+            if (!b) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void backtracking(List<List<Integer>> rooms, boolean[] visited, int key) {
+
+        if (visited[key]) {
+            return;
+        }
+
+        visited[key] = true;
+        for (int k : rooms.get(key)) {
+            backtracking(rooms, visited, k);
         }
     }
 }
