@@ -101,4 +101,49 @@ public class DecodeWays_91 {
             return 0;
         }
     }
+
+    public int numDecodings_3(String s) {
+        Map<String, Integer> map = new HashMap<>();
+        int rst = dp_3(s, map);
+        return rst;
+    }
+
+    private int dp_3(String s, Map<String, Integer> map) {
+
+        if (s.startsWith("0")) {
+            return 0;
+        }
+        if (map.containsKey(s)) {
+            return map.get(s);
+        }
+        int len = s.length();
+
+        int firstCnt = 0;
+        int secondCnt = 0;
+        if (len > 2) {
+            int second = Integer.parseInt(s.substring(0, 2));
+
+            firstCnt = dp_3(s.substring(1), map);
+
+            if (second <= 26) {
+                secondCnt = dp_3(s.substring(2), map);
+            }
+        } else if (len == 2) {
+            if (s.contains("0")) {
+                firstCnt = 0;
+            } else {
+                firstCnt = 1;
+            }
+
+            int second = Integer.parseInt(s.substring(0, 2));
+            if (second <= 26) {
+                secondCnt = 1;
+            }
+        } else if (len == 1) {
+            firstCnt = 1;
+        }
+
+        map.put(s, firstCnt + secondCnt);
+        return firstCnt + secondCnt;
+    }
 }
