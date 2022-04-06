@@ -90,4 +90,33 @@ public class Permutations2_47 {
             }
         }
     }
+
+    public List<List<Integer>> permuteUnique_3(int[] nums) {
+        Set<List<Integer>> rst = new HashSet<>();
+        boolean[] visited = new boolean[nums.length];
+        List<Integer> list = new ArrayList<>();
+
+        backtracking3(rst, visited, nums, list);
+        return new ArrayList<>(rst);
+    }
+
+    private void backtracking3(Set<List<Integer>> rst, boolean[] visited, int[] nums, List<Integer> list) {
+
+        if (list.size() == nums.length) {
+            rst.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (!visited[i]) {
+                list.add(nums[i]);
+                visited[i] = true;
+
+                backtracking3(rst, visited, nums, list);
+
+                visited[i] = false;
+                list.remove(list.size() - 1);
+            }
+        }
+    }
 }

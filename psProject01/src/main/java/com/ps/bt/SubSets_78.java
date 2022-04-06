@@ -68,4 +68,28 @@ public class SubSets_78 {
         bt3(rst, nums, list, i + 1);
         list.remove(list.size() - 1);
     }
+
+    public List<List<Integer>> subsets_4(int[] nums) {
+        List<List<Integer>> rst = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        // boolean[] visited = new boolean[nums.length];
+
+        backtraking3(rst, list, nums, 0);
+        return rst;
+    }
+
+    private void backtraking3(List<List<Integer>> rst, List<Integer> list, int[] nums, int idx) {
+
+        if (idx == nums.length) {
+            rst.add(new ArrayList<>(list));
+            return;
+        }
+
+        backtraking3(rst, list, nums, idx + 1);
+
+        list.add(nums[idx]);
+        backtraking3(rst, list, nums, idx + 1);
+        list.remove(list.size() - 1);
+
+    }
 }

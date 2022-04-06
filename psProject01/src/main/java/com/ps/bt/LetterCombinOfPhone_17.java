@@ -90,8 +90,33 @@ public class LetterCombinOfPhone_17 {
         String p = phone.get(key);
 
         for (int j = 0; j < p.length(); j++) {
-            String s = p.substring(j, j+1);
-            bt3(rst, digits, i+1, tmp+s);
+            String s = p.substring(j, j + 1);
+            bt3(rst, digits, i + 1, tmp + s);
+        }
+    }
+
+    public List<String> letterCombinations_4(String digits) {
+
+        List<String> rst = new ArrayList<>();
+        if (digits.length() == 0) {
+            return rst;
+        }
+        backtracking4(rst, digits, "", 0);
+
+        return rst;
+    }
+
+    private void backtracking4(List<String> rst, String digits, String curr, int idx) {
+
+        if (idx == digits.length()) {
+            rst.add(new String(curr));
+            return;
+        }
+
+        String key = digits.substring(idx, idx + 1);
+        String tmp = phone.get(key);
+        for (int i = 0; i < tmp.length(); i++) {
+            backtracking4(rst, digits, curr + tmp.substring(i, i + 1), idx + 1);
         }
     }
 }

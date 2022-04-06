@@ -6,7 +6,7 @@ import java.util.List;
 public class PalindromePartitioning_131 {
     public static void main(String[] args) {
         PalindromePartitioning_131 p = new PalindromePartitioning_131();
-        p.partition("aab");
+        p.partition_3("aab");
     }
 
     public List<List<String>> partition(String s) {
@@ -81,6 +81,47 @@ public class PalindromePartitioning_131 {
             }
             start++;
             last--;
+        }
+        return true;
+    }
+
+    public List<List<String>> partition_3(String s) {
+
+        List<List<String>> rst = new ArrayList<>();
+        List<String> list = new ArrayList<>();
+
+        backtracking_3(rst, list, s, 0);
+        return rst;
+    }
+
+    private void backtracking_3(List<List<String>> rst, List<String> list, String s, int idx) {
+
+        if (idx == s.length()) {
+            rst.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i = idx + 1; i <= s.length(); i++) {
+            String tmp = s.substring(idx, i);
+            if (isvalid(tmp)) {
+                list.add(tmp);
+                backtracking_3(rst, list, s, i);
+                list.remove(list.size() - 1);
+            }
+        }
+    }
+
+    private boolean isvalid(String tmp) {
+        int left = 0;
+        int right = tmp.length() - 1;
+
+        while (right > left) {
+            if (tmp.charAt(left) == tmp.charAt(right)) {
+                left++;
+                right--;
+            } else {
+                return false;
+            }
         }
         return true;
     }
