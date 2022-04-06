@@ -36,4 +36,91 @@ public class MinFallingPathSum_931 {
         }
     }
 
+    // time complexity - o(n^2)
+    // backtracking - time limit exceeded
+    // public int minFallingPathSum_2(int[][] matrix) {
+    // int len = matrix.length;
+
+    // int min = Integer.MAX_VALUE;
+    // for (int i = 0; i < len; i++) {
+
+    // int tmp = backtracking(0, i, matrix) + matrix[0][i];
+    // min = Math.min(tmp, min);
+    // }
+    // return min;
+    // }
+
+    // private int backtracking(int y, int x, int[][] matrix) {
+    // if (y == matrix.length - 1) {
+    // return 0;
+    // }
+    // int min = Integer.MAX_VALUE;
+    // for (int i = -1; i < 2; i++) {
+    // if (x + i < 0 || x + i >= matrix.length) {
+    // continue;
+    // }
+
+    // int tmp = backtracking(y + 1, x + i, matrix) + matrix[y + 1][x + i];
+    // min = Math.min(tmp, min);
+    // }
+    // return min;
+    // }
+
+    public int minFallingPathSum_2(int[][] matrix) {
+        int len = matrix.length;
+
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < len; i++) {
+
+            int tmp = backtracking(0, i, matrix);
+            min = Math.min(tmp, min);
+        }
+        return min;
+    }
+
+    private int backtracking(int y, int x, int[][] matrix) {
+        if (y == matrix.length) {
+            return 0;
+        }
+        int min = Integer.MAX_VALUE;
+        for (int i = -1; i < 2; i++) {
+            if (x + i < 0 || x + i >= matrix.length) {
+                continue;
+            }
+
+            int tmp = backtracking(y + 1, x + i, matrix) + matrix[y][x + i];
+            min = Math.min(tmp, min);
+        }
+        return min;
+    }
+
+    public int minFallingPathSum_3(int[][] matrix) {
+
+        int len = matrix.length;
+        for (int i = 1; i < len; i++) {
+            dynamicProgramming(i, matrix);
+        }
+
+        int min = Arrays.stream(matrix[len - 1]).min().getAsInt();
+        return min;
+    }
+
+    private void dynamicProgramming(int y, int[][] matrix) {
+        int len = matrix.length;
+        if (y == len) {
+            return;
+        }
+
+        for (int i = 0; i < len; i++) {
+
+            if (i == 0) {
+                matrix[y][i] = Math.min(matrix[y - 1][i], matrix[y - 1][i + 1]) + matrix[y][i];
+            } else if (i == len - 1) {
+                matrix[y][i] = Math.min(matrix[y - 1][i], matrix[y - 1][i - 1]) + matrix[y][i];
+            } else {
+                int tmp = Math.min(matrix[y - 1][i], matrix[y - 1][i - 1]);
+                matrix[y][i] = Math.min(tmp, matrix[y - 1][i + 1]) + matrix[y][i];
+            }
+        }
+    }
 }
