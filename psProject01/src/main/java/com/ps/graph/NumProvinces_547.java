@@ -9,6 +9,8 @@ public class NumProvinces_547 {
         System.out.println(p.findCircleNum(isc));
     }
 
+    // graph - backtracking
+    // time complexity - o(n)
     public int findCircleNum(int[][] isConnected) {
         int len = isConnected.length;
         boolean[] visited = new boolean[isConnected.length];
@@ -32,6 +34,8 @@ public class NumProvinces_547 {
         }
     }
 
+    // graph - union find
+    // time complexity - o(n^2)
     public int findCircleNum_union(int[][] isConnected) {
         int len = isConnected.length;
 
@@ -64,4 +68,67 @@ public class NumProvinces_547 {
         }
         return find(parent, parent[i]);
     }
+
+    public int findCircleNum_2_union_find(int[][] isConnected) {
+
+        int len = isConnected.length;
+
+        int[] parent = new int[len];
+
+        for (int i = 0; i < len; i++) {
+            int[] tmp = isConnected[i];
+
+            for (int j = 0; j < len; j++) {
+                if (tmp[j] == 1) {
+                    int from = find_2(i, parent);
+                    int to = find_2(j, parent);
+
+                    if (from != to) {
+                        // is not connected
+                        parent[from] = to;
+                    }
+                }
+            }
+        }
+
+        int aa = (int) Arrays.stream(parent).filter(i -> i == 0).count();
+        return aa;
+    }
+
+    private int find_2(int idx, int[] parent) {
+        if (parent[idx] == 0) {
+            return idx;
+        }
+        return find_2(parent[idx], parent);
+    }
+
+    public int findCircleNum_2_backtracking(int[][] isConnected) {
+
+        int len = isConnected.length;
+        int cnt = 0;
+
+        boolean[] visited = new boolean[len];
+
+        for (int i = 0; i < len; i++) {
+
+            if (!visited[i]) {
+                cnt++;
+                backtracking(visited, i, isConnected);
+            }
+        }
+        return cnt;
+    }
+
+    private void backtracking(boolean[] visited, int idx, int[][] isConnected) {
+        int[] tmp = isConnected[idx];
+
+        for (int i = 0; i < tmp.length; i++) {
+
+            if (tmp[i] == 1 && !visited[i]) {
+                visited[i] = true;
+                backtracking(visited, i, isConnected);
+            }
+        }
+    }
+
 }
