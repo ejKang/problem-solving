@@ -80,4 +80,86 @@ public class ShortestBridge_934 {
 
         return;
     }
+
+    public int shortestBridge_2(int[][] grid) {
+        int len = grid.length;
+        boolean[][] visited = new boolean[len][len];
+        Queue<Integer[]> queue = new LinkedList<>();
+
+        int[][] direction = { { 1, 0 }, { -1, 0 }, { 0, -1 }, { 0, 1 } };
+        for (int i = 0; i < len; i++) {
+
+            for (int j = 0; j < len; j++) {
+
+                if (grid[i][j] == 1) {
+                    findAllCurrentIsland(grid, visited, queue, i, j);
+
+                    int cnt = 0;
+                    while (!queue.isEmpty()) {
+                        int queueSize = queue.size();
+
+                        for (int k = 0; k < queueSize; k++) {
+                            Integer[] tmp = queue.poll();
+
+                            for (int[] dir : direction) {
+                                if (!validPosition(tmp[0] + dir[0], tmp[1] + dir[1], len)) {
+                                    continue;
+                                }
+
+                                Integer[] newValue = { tmp[0] + dir[0], tmp[1] + dir[1] };
+
+                                if (visited[newValue[0]][newValue[1]]) {
+                                    continue;
+                                }
+                                if (grid[newValue[0]][newValue[1]] == 1) {
+                                    return cnt;
+                                }
+                                visited[newValue[0]][newValue[1]] = true;
+                                queue.offer(newValue);
+                            }
+                        }
+                        cnt++;
+                    }
+
+                    return -1;
+                }
+            }
+        }
+        return -1;
+    }
+
+    private void findAllCurrentIsland(int[][] grid, boolean[][] visited, Queue<Integer[]> queue, int y, int x) {
+
+        if (!validPosition(y, x, grid.length)) {
+            return;
+        }
+
+        if (grid[y][x] != 1) {
+            return;
+        }
+
+        if (visited[y][x]) {
+            return;
+        }
+
+        visited[y][x] = true;
+        Integer[] target = { y, x };
+        queue.offer(target);
+
+        int[][] direction = { { 1, 0 }, { -1, 0 }, { 0, -1 }, { 0, 1 } };
+
+        for (int[] dir : direction) {
+            findAllCurrentIsland(grid, visited, queue, y + dir[0], x + dir[1]);
+        }
+    }
+
+    private boolean validPosition(int y, int x, int length) {
+
+        if (y < 0 || x < 0 || y > length - 1 || x > length - 1) {
+            return false;
+        }
+
+        return true;
+
+    }
 }

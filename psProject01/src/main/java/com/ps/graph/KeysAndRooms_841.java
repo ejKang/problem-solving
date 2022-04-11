@@ -119,4 +119,34 @@ public class KeysAndRooms_841 {
             backtracking(rooms, visited, k);
         }
     }
+
+    public boolean canVisitAllRooms_4(List<List<Integer>> rooms) {
+
+        int len = rooms.size();
+        boolean[] visited = new boolean[len];
+
+        backtracking_4(rooms, visited, 0);
+
+        for (boolean vv : visited) {
+            if (!vv) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void backtracking_4(List<List<Integer>> rooms, boolean[] visited, int idx) {
+
+        if (visited[idx]) {
+            return;
+        }
+        List<Integer> target = rooms.get(idx);
+
+        visited[idx] = true;
+        for (int room : target) {
+            if (!visited[room]) {
+                backtracking_4(rooms, visited, room);
+            }
+        }
+    }
 }

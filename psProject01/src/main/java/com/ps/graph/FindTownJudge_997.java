@@ -24,4 +24,21 @@ public class FindTownJudge_997 {
 
         return -1;
     }
+
+    public int findJudge_2(int n, int[][] trust) {
+        boolean[] notJudge = new boolean[n];
+        int[] cntArr = new int[n];
+
+        for (int[] tr : trust) {
+            notJudge[tr[0] - 1] = true;
+            cntArr[tr[1] - 1] += 1;
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (!notJudge[i] && cntArr[i] == n - 1) {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
 }
