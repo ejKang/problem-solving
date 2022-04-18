@@ -142,4 +142,46 @@ public class CoinChange_322 {
         }
         return rst[amount];
     }
+
+    public int coinChange_3(int[] coins, int amount) {
+
+        int[] coinCnt = new int[amount + 1];
+
+        for (int coin : coins) {
+            if (coin <= amount) {
+                coinCnt[coin] = 1;
+
+            }
+        }
+
+        dynamicProgramming_3(coins, coinCnt, amount);
+        return coinCnt[amount];
+    }
+
+    private int dynamicProgramming_3(int[] coins, int[] coinCnt, int amount) {
+        if (amount == 0) {
+            return 0;
+        } else if (amount < 0) {
+            return -1;
+        } else if (coinCnt[amount] != 0) {
+            return coinCnt[amount];
+        }
+
+        int min = Integer.MAX_VALUE;
+
+        for (int coin : coins) {
+            int tmp = dynamicProgramming_3(coins, coinCnt, amount - coin);
+
+            if (tmp != -1 && min > tmp) {
+                min = tmp + 1;
+            }
+        }
+
+        if (min == Integer.MAX_VALUE) {
+            min = -1;
+        }
+        coinCnt[amount] = min;
+
+        return min;
+    }
 }
