@@ -41,4 +41,27 @@ public class HouseRober_198 {
         }
         return Math.max(current, previous);
     }
+
+    public int rob_2(int[] nums) {
+        int len = nums.length;
+
+        if (len <= 1) {
+            return nums[0];
+        }
+        int[][] rst = new int[len + 1][2];
+
+        int tmp1 = dynamicProgramming(1, len, nums, rst, 0);
+        int tmp2 = dynamicProgramming(2, len, nums, rst, 1);
+
+        return Math.max(tmp1, tmp2);
+    }
+
+    private int dynamicProgramming(int start, int end, int[] nums, int[][] rst, int idx) {
+        rst[start][idx] = nums[start - 1];
+
+        for (int i = start; i < end; i++) {
+            rst[i + 1][idx] = Math.max(rst[i][idx], rst[i - 1][idx] + nums[i]);
+        }
+        return rst[end][idx];
+    }
 }
