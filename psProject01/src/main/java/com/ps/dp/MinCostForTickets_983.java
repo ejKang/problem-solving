@@ -42,4 +42,37 @@ public class MinCostForTickets_983 {
         return min;
     }
 
+    public int mincostTickets_2(int[] days, int[] costs) {
+        int[] tmp = { 1, 7, 30 };
+        int[] dp = new int[days.length];
+        int rst = dfs_2(days, costs, tmp, 0, dp);
+        return rst;
+    }
+
+    private int dfs_2(int[] days, int[] costs, int[] tmp, int idx, int[] dp) {
+        if (idx >= days.length) {
+            return 0;
+        }
+
+        if (dp[idx] != 0) {
+            return dp[idx];
+        }
+
+        int currentDay = days[idx];
+
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < costs.length; i++) {
+            int tmpIdx = idx + 1;
+            while (tmpIdx < days.length && currentDay + tmp[i] - 1 >= days[tmpIdx]) {
+                tmpIdx++;
+            }
+
+            int tmpValue = dfs_2(days, costs, tmp, tmpIdx, dp) + costs[i];
+            min = Math.min(tmpValue, min);
+        }
+
+        dp[idx] = min;
+
+        return min;
+    }
 }
