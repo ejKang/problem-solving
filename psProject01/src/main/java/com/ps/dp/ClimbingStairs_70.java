@@ -100,4 +100,22 @@ public class ClimbingStairs_70 {
         }
         return arr[n];
     }
+
+    public int climbStairs_4(int n) {
+
+        if (n < 2) {
+            return n;
+        }
+        int[] dp = new int[2];
+        dp[0] = 1;
+        dp[1] = 2;
+
+        int tmp = 0;
+        for (int i = 2; i < n; i++) {
+            tmp = dp[0] + dp[1];
+            dp[0] = dp[1];
+            dp[1] = tmp;
+        }
+        return dp[1];
+    }
 }
