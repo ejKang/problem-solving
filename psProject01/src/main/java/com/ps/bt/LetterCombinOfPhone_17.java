@@ -119,4 +119,34 @@ public class LetterCombinOfPhone_17 {
             backtracking4(rst, digits, curr + tmp.substring(i, i + 1), idx + 1);
         }
     }
+
+    public List<String> letterCombinations_5(String digits) {
+
+        List<String> rst = new ArrayList<>();
+
+        if (digits.length() == 0) {
+            return rst;
+        }
+
+        int len = digits.length();
+
+        backTracking_5(rst, digits, 0, len, "");
+
+        return rst;
+    }
+
+    private void backTracking_5(List<String> rst, String digits, int idx, int len, String tmp) {
+
+        if (idx == len) {
+            rst.add(tmp);
+            return;
+        }
+
+        String key = digits.substring(idx, idx + 1);
+        String alph = phone.get(key);
+
+        for (int i = 0; i < alph.length(); i++) {
+            backTracking_5(rst, digits, idx + 1, len, tmp + alph.substring(i, i + 1));
+        }
+    }
 }
